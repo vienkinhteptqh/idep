@@ -6,24 +6,21 @@
 <title>IDEP - Viện Kinh tế Phát triển và Quy hoạch</title>
 <meta name="description" content="Viện Kinh tế Phát triển và Quy hoạch (IDEP) - Tổ chức nghiên cứu và tư vấn khoa học về kinh tế phát triển, quy hoạch, đổi mới sáng tạo và chuyển đổi số.">
 
-<!-- Google Fonts: Playfair Display (serif, học thuật) + Inter (sans-serif hiện đại) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-<!-- Font Awesome cho icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
-    /* ===== CSS VARIABLES - Dễ đổi màu sau này ===== */
     :root {
-        --navy: #0A2540;          /* Màu xanh navy chủ đạo (từ logo) */
+        --navy: #0A2540;
         --navy-dark: #061829;
         --navy-light: #1a3a5c;
-        --gold: #C9A961;          /* Màu vàng gold (từ logo) */
+        --gold: #C9A961;
         --gold-light: #D4B876;
         --gold-dark: #a88a47;
-        --cream: #FAF7F2;         /* Màu nền sáng ấm */
+        --ema-blue: #1E3A7B;
+        --cream: #FAF7F2;
         --white: #FFFFFF;
         --gray-50: #F8F9FA;
         --gray-100: #E9ECEF;
@@ -37,17 +34,8 @@
         --font-display: 'Playfair Display', Georgia, serif;
         --font-body: 'Be Vietnam Pro', -apple-system, sans-serif;
     }
-
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
-    html {
-        scroll-behavior: smooth;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
         font-family: var(--font-body);
         color: var(--text-dark);
@@ -56,1278 +44,369 @@
         overflow-x: hidden;
     }
 
-    /* ===== TOP BAR (thông tin liên hệ) ===== */
-    .top-bar {
-        background: var(--navy-dark);
-        color: var(--white);
-        padding: 8px 0;
-        font-size: 13px;
-    }
+    /* TOP BAR */
+    .top-bar { background: var(--navy-dark); color: var(--white); padding: 8px 0; font-size: 13px; }
+    .top-bar-content { max-width: 1280px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; }
+    .top-bar-info { display: flex; gap: 24px; }
+    .top-bar-info span { display: flex; align-items: center; gap: 8px; }
+    .top-bar-info i { color: var(--gold); }
+    .lang-switcher { display: flex; gap: 8px; align-items: center; }
+    .lang-btn { background: transparent; border: 1px solid transparent; color: var(--white); padding: 2px 10px; cursor: pointer; font-size: 12px; font-weight: 600; border-radius: 3px; transition: all 0.3s; }
+    .lang-btn.active { background: var(--gold); color: var(--navy-dark); }
+    .lang-btn:hover:not(.active) { background: rgba(201, 169, 97, 0.2); }
 
-    .top-bar-content {
-        max-width: 1280px;
-        margin: 0 auto;
-        padding: 0 24px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
+    /* HEADER */
+    .header { background: var(--white); box-shadow: var(--shadow-sm); position: sticky; top: 0; z-index: 1000; border-bottom: 3px solid var(--gold); }
+    .nav-container { max-width: 1280px; margin: 0 auto; padding: 14px 24px; display: flex; justify-content: space-between; align-items: center; }
+    .logo-area { display: flex; align-items: center; gap: 14px; }
+    .logo-area img { height: 56px; width: auto; }
+    .logo-text { display: flex; flex-direction: column; }
+    .logo-text .name-vn { font-family: var(--font-display); font-weight: 700; font-size: 16px; color: var(--navy); line-height: 1.1; letter-spacing: 0.3px; }
+    .logo-text .name-en { font-size: 11px; color: var(--gray-600); font-style: italic; letter-spacing: 0.3px; margin-top: 2px; }
+    .main-nav { display: flex; gap: 2px; align-items: center; }
+    .main-nav a { color: var(--navy); text-decoration: none; padding: 10px 12px; font-weight: 500; font-size: 13.5px; letter-spacing: 0.2px; position: relative; transition: color 0.3s; }
+    .main-nav a::after { content: ''; position: absolute; bottom: 0; left: 12px; right: 12px; height: 2px; background: var(--gold); transform: scaleX(0); transition: transform 0.3s; transform-origin: center; }
+    .main-nav a:hover::after, .main-nav a.active::after { transform: scaleX(1); }
+    .main-nav a:hover { color: var(--gold-dark); }
+    .nav-cta { background: var(--navy); color: var(--white) !important; padding: 10px 18px !important; border-radius: 4px; margin-left: 6px; transition: background 0.3s; }
+    .nav-cta:hover { background: var(--gold) !important; color: var(--navy-dark) !important; }
+    .nav-cta::after { display: none !important; }
 
-    .top-bar-info {
-        display: flex;
-        gap: 24px;
-    }
+    /* HERO */
+    .hero { position: relative; height: 640px; background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 50%, var(--navy-light) 100%); color: var(--white); overflow: hidden; display: flex; align-items: center; }
+    .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: radial-gradient(circle at 20% 30%, rgba(201, 169, 97, 0.15) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(201, 169, 97, 0.1) 0%, transparent 50%); }
+    .hero-pattern { position: absolute; top: 0; right: 0; width: 50%; height: 100%; opacity: 0.08; background-image: linear-gradient(45deg, var(--gold) 25%, transparent 25%), linear-gradient(-45deg, var(--gold) 25%, transparent 25%); background-size: 40px 40px; }
+    .hero-content { max-width: 1280px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; display: grid; grid-template-columns: 1.3fr 1fr; gap: 60px; align-items: center; width: 100%; }
+    .hero-text { animation: fadeInUp 1s ease-out; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(201, 169, 97, 0.15); border: 1px solid var(--gold); padding: 8px 16px; border-radius: 24px; font-size: 13px; font-weight: 500; color: var(--gold-light); margin-bottom: 24px; letter-spacing: 0.5px; }
+    .hero-badge i { color: var(--gold); }
+    .hero-title { font-family: var(--font-display); font-size: 52px; font-weight: 700; line-height: 1.15; margin-bottom: 24px; letter-spacing: -0.5px; }
+    .hero-title .highlight { color: var(--gold); font-style: italic; }
+    .hero-subtitle { font-size: 18px; line-height: 1.7; margin-bottom: 36px; opacity: 0.9; font-weight: 300; max-width: 580px; }
+    .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-primary { background: var(--gold); color: var(--navy-dark); padding: 14px 32px; border: none; border-radius: 4px; font-family: var(--font-body); font-size: 15px; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; transition: all 0.3s; letter-spacing: 0.3px; }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 10px 25px rgba(201, 169, 97, 0.4); }
+    .btn-secondary { background: transparent; color: var(--white); padding: 14px 32px; border: 2px solid var(--white); border-radius: 4px; font-family: var(--font-body); font-size: 15px; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; transition: all 0.3s; }
+    .btn-secondary:hover { background: var(--white); color: var(--navy-dark); }
 
-    .top-bar-info span {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
+    .hero-card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 32px; animation: fadeInUp 1s ease-out 0.3s backwards; }
+    .hero-card-label { color: var(--gold); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin-bottom: 12px; }
+    .hero-card-title { font-family: var(--font-display); font-size: 24px; font-weight: 600; margin-bottom: 16px; line-height: 1.3; }
+    .hero-card-desc { font-size: 14px; opacity: 0.85; line-height: 1.6; margin-bottom: 20px; }
+    .hero-card-link { color: var(--gold); text-decoration: none; font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--gold); padding-bottom: 2px; transition: gap 0.3s; }
+    .hero-card-link:hover { gap: 12px; }
 
-    .top-bar-info i {
-        color: var(--gold);
-    }
-
-    .lang-switcher {
-        display: flex;
-        gap: 8px;
-        align-items: center;
-    }
-
-    .lang-btn {
-        background: transparent;
-        border: 1px solid transparent;
-        color: var(--white);
-        padding: 2px 10px;
-        cursor: pointer;
-        font-size: 12px;
-        font-weight: 600;
-        border-radius: 3px;
-        transition: all 0.3s;
-    }
-
-    .lang-btn.active {
-        background: var(--gold);
-        color: var(--navy-dark);
-    }
-
-    .lang-btn:hover:not(.active) {
-        background: rgba(201, 169, 97, 0.2);
-    }
-
-    /* ===== HEADER / NAVIGATION ===== */
-    .header {
-        background: var(--white);
-        box-shadow: var(--shadow-sm);
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        border-bottom: 3px solid var(--gold);
-    }
-
-    .nav-container {
-        max-width: 1280px;
-        margin: 0 auto;
-        padding: 16px 24px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .logo-area {
-        display: flex;
-        align-items: center;
-        gap: 14px;
-    }
-
-    .logo-area img {
-        height: 60px;
-        width: auto;
-    }
-
-    .logo-text {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .logo-text .name-vn {
-        font-family: var(--font-display);
-        font-weight: 700;
-        font-size: 18px;
-        color: var(--navy);
-        line-height: 1.1;
-        letter-spacing: 0.5px;
-    }
-
-    .logo-text .name-en {
-        font-size: 11px;
-        color: var(--gray-600);
-        font-style: italic;
-        letter-spacing: 0.3px;
-        margin-top: 2px;
-    }
-
-    .main-nav {
-        display: flex;
-        gap: 4px;
-        align-items: center;
-    }
-
-    .main-nav a {
-        color: var(--navy);
-        text-decoration: none;
-        padding: 10px 16px;
-        font-weight: 500;
-        font-size: 14.5px;
-        letter-spacing: 0.2px;
-        position: relative;
-        transition: color 0.3s;
-    }
-
-    .main-nav a::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 16px;
-        right: 16px;
-        height: 2px;
-        background: var(--gold);
-        transform: scaleX(0);
-        transition: transform 0.3s;
-        transform-origin: center;
-    }
-
-    .main-nav a:hover::after,
-    .main-nav a.active::after {
-        transform: scaleX(1);
-    }
-
-    .main-nav a:hover {
-        color: var(--gold-dark);
-    }
-
-    .nav-cta {
-        background: var(--navy);
-        color: var(--white) !important;
-        padding: 10px 20px !important;
-        border-radius: 4px;
-        margin-left: 8px;
-        transition: background 0.3s;
-    }
-
-    .nav-cta:hover {
-        background: var(--gold) !important;
-        color: var(--navy-dark) !important;
-    }
-
-    .nav-cta::after {
-        display: none !important;
-    }
-
-    /* ===== HERO SECTION ===== */
-    .hero {
-        position: relative;
-        height: 640px;
-        background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 50%, var(--navy-light) 100%);
-        color: var(--white);
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-    }
-
-    /* Hoa văn trang trí background */
-    .hero::before {
-        content: '';
-        position: absolute;
-        top: 0; left: 0; right: 0; bottom: 0;
-        background-image:
-            radial-gradient(circle at 20% 30%, rgba(201, 169, 97, 0.15) 0%, transparent 50%),
-            radial-gradient(circle at 80% 70%, rgba(201, 169, 97, 0.1) 0%, transparent 50%);
-    }
-
-    /* Hoạ tiết hình học trang trí */
-    .hero-pattern {
-        position: absolute;
-        top: 0; right: 0;
-        width: 50%;
-        height: 100%;
-        opacity: 0.08;
-        background-image:
-            linear-gradient(45deg, var(--gold) 25%, transparent 25%),
-            linear-gradient(-45deg, var(--gold) 25%, transparent 25%);
-        background-size: 40px 40px;
-    }
-
-    .hero-content {
-        max-width: 1280px;
-        margin: 0 auto;
-        padding: 0 24px;
-        position: relative;
-        z-index: 2;
-        display: grid;
-        grid-template-columns: 1.3fr 1fr;
-        gap: 60px;
-        align-items: center;
-        width: 100%;
-    }
-
-    .hero-text {
-        animation: fadeInUp 1s ease-out;
-    }
-
-    .hero-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        background: rgba(201, 169, 97, 0.15);
-        border: 1px solid var(--gold);
-        padding: 8px 16px;
-        border-radius: 24px;
-        font-size: 13px;
-        font-weight: 500;
-        color: var(--gold-light);
-        margin-bottom: 24px;
-        letter-spacing: 0.5px;
-    }
-
-    .hero-badge i {
-        color: var(--gold);
-    }
-
-    .hero-title {
-        font-family: var(--font-display);
-        font-size: 52px;
-        font-weight: 700;
-        line-height: 1.15;
-        margin-bottom: 24px;
-        letter-spacing: -0.5px;
-    }
-
-    .hero-title .highlight {
-        color: var(--gold);
-        font-style: italic;
-    }
-
-    .hero-subtitle {
-        font-size: 18px;
-        line-height: 1.7;
-        margin-bottom: 36px;
-        opacity: 0.9;
-        font-weight: 300;
-        max-width: 580px;
-    }
-
-    .hero-cta {
-        display: flex;
-        gap: 16px;
-    }
-
-    .btn-primary {
-        background: var(--gold);
-        color: var(--navy-dark);
-        padding: 14px 32px;
-        border: none;
-        border-radius: 4px;
-        font-family: var(--font-body);
-        font-size: 15px;
-        font-weight: 600;
-        cursor: pointer;
-        text-decoration: none;
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        transition: all 0.3s;
-        letter-spacing: 0.3px;
-    }
-
-    .btn-primary:hover {
-        background: var(--gold-light);
-        transform: translateY(-2px);
-        box-shadow: 0 10px 25px rgba(201, 169, 97, 0.4);
-    }
-
-    .btn-secondary {
-        background: transparent;
-        color: var(--white);
-        padding: 14px 32px;
-        border: 2px solid var(--white);
-        border-radius: 4px;
-        font-family: var(--font-body);
-        font-size: 15px;
-        font-weight: 600;
-        cursor: pointer;
-        text-decoration: none;
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        transition: all 0.3s;
-    }
-
-    .btn-secondary:hover {
-        background: var(--white);
-        color: var(--navy-dark);
-    }
-
-    /* Hero card nổi bật bên phải */
-    .hero-card {
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 8px;
-        padding: 32px;
-        animation: fadeInUp 1s ease-out 0.3s backwards;
-    }
-
-    .hero-card-label {
-        color: var(--gold);
-        font-size: 12px;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        font-weight: 600;
-        margin-bottom: 12px;
-    }
-
-    .hero-card-title {
-        font-family: var(--font-display);
-        font-size: 24px;
-        font-weight: 600;
-        margin-bottom: 16px;
-        line-height: 1.3;
-    }
-
-    .hero-card-desc {
-        font-size: 14px;
-        opacity: 0.85;
-        line-height: 1.6;
-        margin-bottom: 20px;
-    }
-
-    .hero-card-link {
-        color: var(--gold);
-        text-decoration: none;
-        font-weight: 600;
-        font-size: 14px;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        border-bottom: 1px solid var(--gold);
-        padding-bottom: 2px;
-        transition: gap 0.3s;
-    }
-
-    .hero-card-link:hover {
-        gap: 12px;
-    }
-
-    /* ===== SECTION GENERAL ===== */
-    .section {
-        padding: 100px 0;
-    }
-
-    .section-container {
-        max-width: 1280px;
-        margin: 0 auto;
-        padding: 0 24px;
-    }
-
-    .section-header {
-        text-align: center;
-        margin-bottom: 64px;
-    }
-
-    .section-tag {
-        display: inline-block;
-        color: var(--gold-dark);
-        font-size: 13px;
-        font-weight: 600;
-        letter-spacing: 3px;
-        text-transform: uppercase;
-        margin-bottom: 16px;
-        position: relative;
-        padding: 0 40px;
-    }
-
-    .section-tag::before,
-    .section-tag::after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        width: 30px;
-        height: 1px;
-        background: var(--gold);
-    }
-
+    /* SECTIONS */
+    .section { padding: 100px 0; }
+    .section-container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+    .section-header { text-align: center; margin-bottom: 64px; }
+    .section-tag { display: inline-block; color: var(--gold-dark); font-size: 13px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 16px; position: relative; padding: 0 40px; }
+    .section-tag::before, .section-tag::after { content: ''; position: absolute; top: 50%; width: 30px; height: 1px; background: var(--gold); }
     .section-tag::before { left: 0; }
     .section-tag::after { right: 0; }
+    .section-title { font-family: var(--font-display); font-size: 42px; font-weight: 700; color: var(--navy); line-height: 1.2; margin-bottom: 16px; letter-spacing: -0.5px; }
+    .section-subtitle { font-size: 17px; color: var(--gray-600); max-width: 700px; margin: 0 auto; line-height: 1.7; }
 
-    .section-title {
-        font-family: var(--font-display);
-        font-size: 42px;
-        font-weight: 700;
-        color: var(--navy);
-        line-height: 1.2;
-        margin-bottom: 16px;
-        letter-spacing: -0.5px;
-    }
+    /* ABOUT */
+    .about { background: var(--cream); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .about-visual { position: relative; }
+    .about-image { width: 100%; height: 480px; background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%); border-radius: 8px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+    .about-image::before { content: ''; position: absolute; inset: 0; background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M0,50 L50,0 L100,50 L50,100 Z" fill="none" stroke="%23C9A961" stroke-width="0.5" opacity="0.3"/></svg>'); background-size: 60px 60px; opacity: 0.3; }
+    .about-image-content { position: relative; z-index: 2; text-align: center; color: var(--white); padding: 40px; }
+    .about-image-content i { font-size: 80px; color: var(--gold); margin-bottom: 20px; }
+    .about-image-content h3 { font-family: var(--font-display); font-size: 28px; margin-bottom: 8px; }
+    .about-image-content p { opacity: 0.85; font-size: 15px; }
+    .about-badge { position: absolute; bottom: -24px; right: -24px; background: var(--gold); color: var(--navy-dark); padding: 24px 32px; border-radius: 8px; box-shadow: var(--shadow-lg); }
+    .about-badge .number { font-family: var(--font-display); font-size: 48px; font-weight: 800; line-height: 1; }
+    .about-badge .label { font-size: 13px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; }
+    .about-text .section-tag { padding: 0; margin-bottom: 12px; }
+    .about-text .section-tag::before, .about-text .section-tag::after { display: none; }
+    .about-text h2 { font-family: var(--font-display); font-size: 38px; color: var(--navy); line-height: 1.2; margin-bottom: 24px; font-weight: 700; }
+    .about-text p { color: var(--gray-800); margin-bottom: 18px; font-size: 15.5px; line-height: 1.8; }
+    .about-features { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+    .about-feature { display: flex; gap: 12px; align-items: flex-start; }
+    .about-feature i { color: var(--gold-dark); font-size: 20px; margin-top: 2px; }
+    .about-feature span { font-weight: 500; color: var(--navy); font-size: 14.5px; }
 
-    .section-subtitle {
-        font-size: 17px;
-        color: var(--gray-600);
-        max-width: 700px;
-        margin: 0 auto;
-        line-height: 1.7;
-    }
+    /* ORG CHART */
+    .org-chart { background: var(--white); }
+    .org-wrapper { margin: 60px auto 0; }
+    .org-tree { display: flex; flex-direction: column; align-items: center; }
+    .org-node { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%); color: var(--white); padding: 16px 36px; border-radius: 8px; font-weight: 700; font-size: 15px; letter-spacing: 1px; text-align: center; box-shadow: var(--shadow-md); border: 2px solid var(--gold); min-width: 200px; }
+    .org-node.top { background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%); color: var(--navy-dark); font-size: 17px; }
+    .org-connector { width: 2px; height: 36px; background: var(--gold); }
+    .org-branches { position: relative; width: 100%; margin-top: 20px; }
+    .org-branches::before { content: ''; position: absolute; top: 0; left: 5%; right: 5%; height: 2px; background: var(--gold); }
+    .org-units { display: grid; grid-template-columns: repeat(9, 1fr); gap: 10px; margin-top: 20px; }
+    .org-unit { background: var(--cream); border: 2px solid var(--gold); border-radius: 6px; padding: 16px 8px; text-align: center; font-size: 12px; font-weight: 600; color: var(--navy); line-height: 1.3; min-height: 90px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; transition: all 0.3s; }
+    .org-unit:hover { background: var(--navy); color: var(--white); transform: translateY(-4px); border-color: var(--navy); }
+    .org-unit::before { content: ''; position: absolute; top: -20px; left: 50%; width: 2px; height: 20px; background: var(--gold); }
+    .org-unit i { font-size: 18px; color: var(--gold-dark); margin-bottom: 6px; transition: color 0.3s; }
+    .org-unit:hover i { color: var(--gold); }
 
-    /* ===== ABOUT SECTION ===== */
-    .about {
-        background: var(--cream);
-        position: relative;
-    }
+    /* FIELDS */
+    .fields { background: var(--cream); }
+    .fields-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .field-card { background: var(--white); border: 1px solid var(--gray-100); border-radius: 8px; padding: 36px 28px; transition: all 0.4s; position: relative; overflow: hidden; cursor: pointer; }
+    .field-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--gold); transform: scaleX(0); transition: transform 0.4s; transform-origin: left; }
+    .field-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-color: var(--gold); }
+    .field-card:hover::before { transform: scaleX(1); }
+    .field-icon { width: 64px; height: 64px; background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; transition: all 0.4s; }
+    .field-card:hover .field-icon { background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%); transform: rotate(-6deg); }
+    .field-icon i { font-size: 28px; color: var(--white); }
+    .field-card h3 { font-family: var(--font-display); font-size: 20px; color: var(--navy); margin-bottom: 12px; font-weight: 700; line-height: 1.3; }
+    .field-card p { color: var(--gray-600); font-size: 14px; line-height: 1.7; }
 
-    .about-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 60px;
-        align-items: center;
-    }
+    /* EMA ACADEMY SECTION */
+    .ema-section { background: linear-gradient(135deg, #0f1f3d 0%, #1E3A7B 100%); color: var(--white); position: relative; overflow: hidden; }
+    .ema-section::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle at 10% 20%, rgba(201, 169, 97, 0.15) 0%, transparent 40%), radial-gradient(circle at 90% 80%, rgba(201, 169, 97, 0.1) 0%, transparent 40%); }
+    .ema-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 60px; align-items: center; position: relative; z-index: 2; }
+    .ema-visual { text-align: center; padding: 40px; }
+    .ema-logo-big { background: var(--white); padding: 50px 60px; border-radius: 16px; box-shadow: var(--shadow-lg); display: inline-block; }
+    .ema-logo-big img { max-width: 100%; height: auto; max-height: 180px; }
+    .ema-columns-deco { margin-top: 32px; font-size: 14px; opacity: 0.85; font-style: italic; letter-spacing: 2px; }
+    .ema-content .section-tag { padding: 0; margin-bottom: 16px; color: var(--gold); }
+    .ema-content .section-tag::before, .ema-content .section-tag::after { display: none; }
+    .ema-content h2 { font-family: var(--font-display); font-size: 40px; color: var(--white); line-height: 1.2; margin-bottom: 16px; font-weight: 700; }
+    .ema-tagline { font-family: var(--font-display); font-style: italic; font-size: 18px; color: var(--gold-light); margin-bottom: 28px; padding-bottom: 20px; border-bottom: 1px solid rgba(201, 169, 97, 0.3); }
+    .ema-content p { font-size: 15.5px; line-height: 1.8; margin-bottom: 20px; opacity: 0.92; }
+    .ema-features { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 28px 0; }
+    .ema-feature { display: flex; gap: 12px; align-items: flex-start; background: rgba(255,255,255,0.05); padding: 14px 16px; border-radius: 6px; border-left: 3px solid var(--gold); }
+    .ema-feature i { color: var(--gold); font-size: 20px; margin-top: 2px; }
+    .ema-feature-text strong { display: block; color: var(--white); font-size: 14.5px; margin-bottom: 2px; font-weight: 600; }
+    .ema-feature-text span { color: rgba(255,255,255,0.75); font-size: 13px; }
+    .ema-cta-group { display: flex; gap: 16px; margin-top: 20px; }
 
-    .about-visual {
-        position: relative;
-    }
+    /* LEADERSHIP - HỘI ĐỒNG VIỆN */
+    .leadership { background: var(--white); }
 
-    .about-image {
-        width: 100%;
-        height: 480px;
-        background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
-        border-radius: 8px;
-        position: relative;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .about-image::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M0,50 L50,0 L100,50 L50,100 Z" fill="none" stroke="%23C9A961" stroke-width="0.5" opacity="0.3"/></svg>');
-        background-size: 60px 60px;
-        opacity: 0.3;
-    }
-
-    .about-image-content {
-        position: relative;
-        z-index: 2;
-        text-align: center;
-        color: var(--white);
+    /* Chủ tịch HĐV - nổi bật ở trên */
+    .chairman-wrapper { display: flex; justify-content: center; margin-bottom: 48px; }
+    .chairman-card {
+        background: linear-gradient(135deg, var(--cream) 0%, var(--white) 100%);
+        border: 2px solid var(--gold);
+        border-radius: 16px;
         padding: 40px;
-    }
-
-    .about-image-content i {
-        font-size: 80px;
-        color: var(--gold);
-        margin-bottom: 20px;
-    }
-
-    .about-image-content h3 {
-        font-family: var(--font-display);
-        font-size: 28px;
-        margin-bottom: 8px;
-    }
-
-    .about-image-content p {
-        opacity: 0.85;
-        font-size: 15px;
-    }
-
-    .about-badge {
-        position: absolute;
-        bottom: -24px;
-        right: -24px;
-        background: var(--gold);
-        color: var(--navy-dark);
-        padding: 24px 32px;
-        border-radius: 8px;
-        box-shadow: var(--shadow-lg);
-    }
-
-    .about-badge .number {
-        font-family: var(--font-display);
-        font-size: 48px;
-        font-weight: 800;
-        line-height: 1;
-    }
-
-    .about-badge .label {
-        font-size: 13px;
-        font-weight: 600;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        margin-top: 4px;
-    }
-
-    .about-text .section-tag {
-        padding: 0;
-        margin-bottom: 12px;
-    }
-
-    .about-text .section-tag::before,
-    .about-text .section-tag::after {
-        display: none;
-    }
-
-    .about-text h2 {
-        font-family: var(--font-display);
-        font-size: 38px;
-        color: var(--navy);
-        line-height: 1.2;
-        margin-bottom: 24px;
-        font-weight: 700;
-    }
-
-    .about-text p {
-        color: var(--gray-800);
-        margin-bottom: 18px;
-        font-size: 15.5px;
-        line-height: 1.8;
-    }
-
-    .about-features {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 16px;
-        margin-top: 32px;
-    }
-
-    .about-feature {
         display: flex;
-        gap: 12px;
-        align-items: flex-start;
-    }
-
-    .about-feature i {
-        color: var(--gold-dark);
-        font-size: 20px;
-        margin-top: 2px;
-    }
-
-    .about-feature span {
-        font-weight: 500;
-        color: var(--navy);
-        font-size: 14.5px;
-    }
-
-    /* ===== FIELDS / LĨNH VỰC ===== */
-    .fields {
-        background: var(--white);
-    }
-
-    .fields-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 24px;
-    }
-
-    .field-card {
-        background: var(--white);
-        border: 1px solid var(--gray-100);
-        border-radius: 8px;
-        padding: 36px 28px;
-        transition: all 0.4s;
-        position: relative;
-        overflow: hidden;
-        cursor: pointer;
-    }
-
-    .field-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 3px;
-        background: var(--gold);
-        transform: scaleX(0);
-        transition: transform 0.4s;
-        transform-origin: left;
-    }
-
-    .field-card:hover {
-        transform: translateY(-8px);
-        box-shadow: var(--shadow-lg);
-        border-color: var(--gold);
-    }
-
-    .field-card:hover::before {
-        transform: scaleX(1);
-    }
-
-    .field-icon {
-        width: 64px;
-        height: 64px;
-        background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 24px;
-        transition: all 0.4s;
-    }
-
-    .field-card:hover .field-icon {
-        background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
-        transform: rotate(-6deg);
-    }
-
-    .field-icon i {
-        font-size: 28px;
-        color: var(--white);
-    }
-
-    .field-card h3 {
-        font-family: var(--font-display);
-        font-size: 20px;
-        color: var(--navy);
-        margin-bottom: 12px;
-        font-weight: 700;
-        line-height: 1.3;
-    }
-
-    .field-card p {
-        color: var(--gray-600);
-        font-size: 14px;
-        line-height: 1.7;
-    }
-
-    /* ===== RESEARCH HIGHLIGHTS ===== */
-    .research {
-        background: var(--cream);
-    }
-
-    .research-grid {
-        display: grid;
-        grid-template-columns: 2fr 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
-        gap: 20px;
-        height: 600px;
-    }
-
-    .research-card {
-        background: var(--white);
-        border-radius: 8px;
-        overflow: hidden;
-        position: relative;
-        cursor: pointer;
-        transition: transform 0.4s;
-        box-shadow: var(--shadow-sm);
-    }
-
-    .research-card:hover {
-        transform: translateY(-4px);
-        box-shadow: var(--shadow-lg);
-    }
-
-    .research-card.large {
-        grid-row: span 2;
-    }
-
-    .research-card-bg {
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-light) 100%);
-    }
-
-    .research-card.card-1 .research-card-bg {
-        background: linear-gradient(135deg, #1a3a5c 0%, #0A2540 100%);
-    }
-
-    .research-card.card-2 .research-card-bg {
-        background: linear-gradient(135deg, #2d5f3f 0%, #1a4428 100%);
-    }
-
-    .research-card.card-3 .research-card-bg {
-        background: linear-gradient(135deg, #8B6F47 0%, #5f4a30 100%);
-    }
-
-    .research-card.card-4 .research-card-bg {
-        background: linear-gradient(135deg, #5d4a7a 0%, #3d2e52 100%);
-    }
-
-    .research-card.card-5 .research-card-bg {
-        background: linear-gradient(135deg, #A67843 0%, #7a5530 100%);
-    }
-
-    .research-card-bg::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
-    }
-
-    .research-pattern {
-        position: absolute;
-        inset: 0;
-        opacity: 0.15;
-        background-image:
-            radial-gradient(circle at 80% 20%, var(--gold) 0%, transparent 40%),
-            radial-gradient(circle at 20% 80%, var(--gold) 0%, transparent 40%);
-    }
-
-    .research-card-content {
-        position: relative;
-        z-index: 2;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        padding: 28px;
-        color: var(--white);
-    }
-
-    .research-card.large .research-card-content {
-        padding: 40px;
-    }
-
-    .research-category {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        background: var(--gold);
-        color: var(--navy-dark);
-        padding: 4px 12px;
-        border-radius: 4px;
-        font-size: 11px;
-        font-weight: 700;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        margin-bottom: 16px;
-        width: fit-content;
-    }
-
-    .research-card h3 {
-        font-family: var(--font-display);
-        font-size: 18px;
-        line-height: 1.3;
-        margin-bottom: 12px;
-        font-weight: 600;
-    }
-
-    .research-card.large h3 {
-        font-size: 28px;
-        line-height: 1.25;
-    }
-
-    .research-meta {
-        display: flex;
-        gap: 16px;
-        font-size: 12px;
-        opacity: 0.8;
-    }
-
-    .research-meta span {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-    }
-
-    /* ===== STATS SECTION ===== */
-    .stats {
-        background: var(--navy);
-        color: var(--white);
-        position: relative;
-        overflow: hidden;
-    }
-
-    .stats::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background:
-            radial-gradient(circle at 10% 20%, rgba(201, 169, 97, 0.15) 0%, transparent 40%),
-            radial-gradient(circle at 90% 80%, rgba(201, 169, 97, 0.1) 0%, transparent 40%);
-    }
-
-    .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
         gap: 40px;
+        align-items: center;
+        max-width: 720px;
+        box-shadow: var(--shadow-md);
         position: relative;
-        z-index: 2;
+        overflow: hidden;
     }
-
-    .stat-item {
-        text-align: center;
-        position: relative;
-    }
-
-    .stat-item:not(:last-child)::after {
+    .chairman-card::before {
         content: '';
         position: absolute;
-        right: -20px;
-        top: 20%;
-        bottom: 20%;
-        width: 1px;
-        background: rgba(201, 169, 97, 0.3);
+        top: -60px;
+        right: -60px;
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
+        opacity: 0.15;
     }
-
-    .stat-number {
-        font-family: var(--font-display);
-        font-size: 64px;
-        font-weight: 800;
-        color: var(--gold);
-        line-height: 1;
-        margin-bottom: 12px;
-    }
-
-    .stat-suffix {
-        font-size: 32px;
-        color: var(--gold);
-    }
-
-    .stat-label {
-        font-size: 14px;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        opacity: 0.9;
-        font-weight: 500;
-    }
-
-    /* ===== LEADERSHIP / Hội đồng Viện ===== */
-    .leadership {
-        background: var(--white);
-    }
-
-    .leaders-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 32px;
-    }
-
-    .leader-card {
-        text-align: center;
-        padding: 32px 24px;
-        border-radius: 8px;
-        transition: all 0.4s;
-        border: 1px solid transparent;
-    }
-
-    .leader-card:hover {
-        background: var(--cream);
-        border-color: var(--gold);
-        transform: translateY(-4px);
-    }
-
-    .leader-avatar {
-        width: 160px;
-        height: 160px;
+    .chairman-photo {
+        width: 180px;
+        height: 180px;
         border-radius: 50%;
-        margin: 0 auto 24px;
-        background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 64px;
-        color: var(--gold);
-        position: relative;
-        border: 4px solid var(--cream);
-        box-shadow: 0 0 0 2px var(--gold);
+        object-fit: cover;
+        border: 5px solid var(--gold);
+        flex-shrink: 0;
+        box-shadow: var(--shadow-md);
     }
-
-    .leader-card:hover .leader-avatar {
-        transform: scale(1.05);
-    }
-
-    .leader-name {
-        font-family: var(--font-display);
-        font-size: 22px;
-        color: var(--navy);
-        font-weight: 700;
-        margin-bottom: 6px;
-    }
-
-    .leader-title {
-        color: var(--gold-dark);
-        font-size: 14px;
-        font-weight: 600;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        margin-bottom: 12px;
-    }
-
-    .leader-bio {
-        color: var(--gray-600);
-        font-size: 14px;
-        line-height: 1.6;
-    }
-
-    /* ===== NEWS SECTION ===== */
-    .news {
-        background: var(--cream);
-    }
-
-    .news-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 32px;
-    }
-
-    .news-card {
-        background: var(--white);
-        border-radius: 8px;
-        overflow: hidden;
-        transition: all 0.4s;
-        box-shadow: var(--shadow-sm);
-        cursor: pointer;
-    }
-
-    .news-card:hover {
-        transform: translateY(-6px);
-        box-shadow: var(--shadow-lg);
-    }
-
-    .news-image {
-        height: 220px;
-        background: linear-gradient(135deg, var(--navy-light) 0%, var(--navy) 100%);
-        position: relative;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .news-card.news-1 .news-image {
-        background: linear-gradient(135deg, #2d5f3f 0%, #1a4428 100%);
-    }
-    .news-card.news-2 .news-image {
-        background: linear-gradient(135deg, #1a3a5c 0%, #0A2540 100%);
-    }
-    .news-card.news-3 .news-image {
-        background: linear-gradient(135deg, #8B6F47 0%, #5f4a30 100%);
-    }
-
-    .news-image i {
-        font-size: 80px;
-        color: rgba(201, 169, 97, 0.4);
-    }
-
-    .news-date {
-        position: absolute;
-        top: 16px;
-        left: 16px;
+    .chairman-info { position: relative; z-index: 2; }
+    .chairman-badge {
+        display: inline-block;
         background: var(--gold);
         color: var(--navy-dark);
-        padding: 6px 14px;
-        border-radius: 4px;
+        padding: 4px 14px;
+        border-radius: 12px;
         font-size: 12px;
         font-weight: 700;
-        letter-spacing: 0.5px;
-    }
-
-    .news-content {
-        padding: 24px;
-    }
-
-    .news-category {
-        color: var(--gold-dark);
-        font-size: 12px;
-        font-weight: 600;
         letter-spacing: 1.5px;
         text-transform: uppercase;
         margin-bottom: 10px;
     }
-
-    .news-title {
+    .chairman-name {
         font-family: var(--font-display);
-        font-size: 19px;
+        font-size: 28px;
         color: var(--navy);
         font-weight: 700;
-        line-height: 1.4;
-        margin-bottom: 12px;
-    }
-
-    .news-excerpt {
-        color: var(--gray-600);
-        font-size: 14px;
-        line-height: 1.6;
-        margin-bottom: 16px;
-    }
-
-    .news-link {
-        color: var(--navy);
-        text-decoration: none;
-        font-weight: 600;
-        font-size: 14px;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        transition: gap 0.3s, color 0.3s;
-    }
-
-    .news-link:hover {
-        gap: 12px;
-        color: var(--gold-dark);
-    }
-
-    /* ===== NEWSLETTER / CTA ===== */
-    .newsletter {
-        background: var(--navy);
-        color: var(--white);
-        padding: 80px 0;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .newsletter::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"><path d="M0,40 L40,0 L80,40 L40,80 Z" fill="none" stroke="%23C9A961" stroke-width="0.5" opacity="0.2"/></svg>');
-        background-size: 80px 80px;
-        opacity: 0.5;
-    }
-
-    .newsletter-content {
-        max-width: 800px;
-        margin: 0 auto;
-        text-align: center;
-        padding: 0 24px;
-        position: relative;
-        z-index: 2;
-    }
-
-    .newsletter h2 {
-        font-family: var(--font-display);
-        font-size: 38px;
-        margin-bottom: 16px;
-    }
-
-    .newsletter p {
-        font-size: 16px;
-        opacity: 0.9;
-        margin-bottom: 32px;
-    }
-
-    .newsletter-form {
-        display: flex;
-        gap: 12px;
-        max-width: 500px;
-        margin: 0 auto;
-    }
-
-    .newsletter-form input {
-        flex: 1;
-        padding: 14px 20px;
-        border: none;
-        border-radius: 4px;
-        font-family: var(--font-body);
-        font-size: 15px;
-    }
-
-    .newsletter-form input:focus {
-        outline: 2px solid var(--gold);
-    }
-
-    /* ===== FOOTER ===== */
-    .footer {
-        background: var(--navy-dark);
-        color: var(--white);
-        padding: 64px 0 0;
-    }
-
-    .footer-grid {
-        max-width: 1280px;
-        margin: 0 auto;
-        padding: 0 24px;
-        display: grid;
-        grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
-        gap: 48px;
-        margin-bottom: 48px;
-    }
-
-    .footer-col h4 {
-        font-family: var(--font-display);
-        color: var(--gold);
-        font-size: 18px;
-        margin-bottom: 20px;
-        position: relative;
-        padding-bottom: 12px;
-    }
-
-    .footer-col h4::after {
-        content: '';
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        width: 40px;
-        height: 2px;
-        background: var(--gold);
-    }
-
-    .footer-about {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    .footer-logo {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-    }
-
-    .footer-logo img {
-        height: 56px;
-        width: auto;
-        filter: brightness(1.1);
-    }
-
-    .footer-logo-text {
-        font-family: var(--font-display);
-        font-size: 17px;
-        font-weight: 700;
-        color: var(--white);
+        margin-bottom: 8px;
         line-height: 1.2;
     }
-
-    .footer-logo-text small {
-        display: block;
-        font-size: 11px;
-        font-weight: 400;
-        font-style: italic;
-        opacity: 0.7;
-        margin-top: 2px;
-    }
-
-    .footer-desc {
-        font-size: 14px;
-        line-height: 1.7;
-        opacity: 0.8;
-    }
-
-    .footer-social {
-        display: flex;
-        gap: 12px;
-        margin-top: 8px;
-    }
-
-    .footer-social a {
-        width: 40px;
-        height: 40px;
-        background: rgba(201, 169, 97, 0.15);
-        border: 1px solid var(--gold);
-        border-radius: 4px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--gold);
-        text-decoration: none;
-        transition: all 0.3s;
-    }
-
-    .footer-social a:hover {
-        background: var(--gold);
-        color: var(--navy-dark);
-    }
-
-    .footer-links {
-        list-style: none;
-    }
-
-    .footer-links li {
+    .chairman-title {
+        color: var(--gold-dark);
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
         margin-bottom: 12px;
     }
-
-    .footer-links a {
-        color: rgba(255, 255, 255, 0.8);
-        text-decoration: none;
-        font-size: 14px;
-        transition: all 0.3s;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-    }
-
-    .footer-links a::before {
-        content: '›';
-        color: var(--gold);
-        font-weight: bold;
-    }
-
-    .footer-links a:hover {
-        color: var(--gold);
-        padding-left: 4px;
-    }
-
-    .footer-contact-item {
-        display: flex;
-        gap: 14px;
-        margin-bottom: 16px;
-        font-size: 14px;
-        align-items: flex-start;
-    }
-
-    .footer-contact-item i {
-        color: var(--gold);
-        margin-top: 4px;
-        font-size: 16px;
-        min-width: 16px;
-    }
-
-    .footer-contact-item span {
-        opacity: 0.9;
+    .chairman-bio {
+        color: var(--gray-800);
+        font-size: 14.5px;
         line-height: 1.6;
     }
 
-    .footer-bottom {
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        padding: 24px;
+    /* 5 members grid */
+    .members-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 24px;
+    }
+    .member-card {
         text-align: center;
-        font-size: 13px;
-        opacity: 0.7;
+        padding: 24px 16px;
+        border-radius: 10px;
+        transition: all 0.4s;
+        border: 1px solid var(--gray-100);
+        background: var(--white);
+    }
+    .member-card:hover {
+        background: var(--cream);
+        border-color: var(--gold);
+        transform: translateY(-6px);
+        box-shadow: var(--shadow-md);
+    }
+    .member-photo {
+        width: 130px;
+        height: 130px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin: 0 auto 18px;
+        border: 3px solid var(--cream);
+        box-shadow: 0 0 0 2px var(--gold);
+        transition: transform 0.4s;
+    }
+    .member-card:hover .member-photo { transform: scale(1.05); }
+    .member-name {
+        font-family: var(--font-display);
+        font-size: 17px;
+        color: var(--navy);
+        font-weight: 700;
+        margin-bottom: 6px;
+        line-height: 1.25;
+    }
+    .member-title {
+        color: var(--gold-dark);
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+    }
+    .member-spec {
+        color: var(--gray-600);
+        font-size: 12.5px;
+        line-height: 1.5;
     }
 
-    .footer-bottom a {
-        color: var(--gold);
-        text-decoration: none;
-    }
+    /* RESEARCH HIGHLIGHTS - Bento grid */
+    .research { background: var(--cream); }
+    .research-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 20px; height: 600px; }
+    .research-card { background: var(--white); border-radius: 8px; overflow: hidden; position: relative; cursor: pointer; transition: transform 0.4s; box-shadow: var(--shadow-sm); }
+    .research-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .research-card.large { grid-row: span 2; }
+    .research-card-bg { position: absolute; inset: 0; background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-light) 100%); }
+    .research-card.card-1 .research-card-bg { background: linear-gradient(135deg, #1a3a5c 0%, #0A2540 100%); }
+    .research-card.card-2 .research-card-bg { background: linear-gradient(135deg, #2d5f3f 0%, #1a4428 100%); }
+    .research-card.card-3 .research-card-bg { background: linear-gradient(135deg, #8B6F47 0%, #5f4a30 100%); }
+    .research-card.card-4 .research-card-bg { background: linear-gradient(135deg, #5d4a7a 0%, #3d2e52 100%); }
+    .research-card.card-5 .research-card-bg { background: linear-gradient(135deg, #A67843 0%, #7a5530 100%); }
+    .research-card-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 50%, transparent 100%); }
+    .research-pattern { position: absolute; inset: 0; opacity: 0.15; background-image: radial-gradient(circle at 80% 20%, var(--gold) 0%, transparent 40%), radial-gradient(circle at 20% 80%, var(--gold) 0%, transparent 40%); }
+    .research-card-content { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; padding: 28px; color: var(--white); }
+    .research-card.large .research-card-content { padding: 40px; }
+    .research-category { display: inline-flex; align-items: center; gap: 6px; background: var(--gold); color: var(--navy-dark); padding: 4px 12px; border-radius: 4px; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px; width: fit-content; }
+    .research-card h3 { font-family: var(--font-display); font-size: 18px; line-height: 1.3; margin-bottom: 12px; font-weight: 600; }
+    .research-card.large h3 { font-size: 28px; line-height: 1.25; }
+    .research-meta { display: flex; gap: 16px; font-size: 12px; opacity: 0.8; flex-wrap: wrap; }
+    .research-meta span { display: flex; align-items: center; gap: 6px; }
 
-    /* ===== ANIMATIONS ===== */
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
+    /* STATS */
+    .stats { background: var(--navy); color: var(--white); position: relative; overflow: hidden; }
+    .stats::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 10% 20%, rgba(201, 169, 97, 0.15) 0%, transparent 40%), radial-gradient(circle at 90% 80%, rgba(201, 169, 97, 0.1) 0%, transparent 40%); }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; position: relative; z-index: 2; }
+    .stat-item { text-align: center; position: relative; }
+    .stat-item:not(:last-child)::after { content: ''; position: absolute; right: -20px; top: 20%; bottom: 20%; width: 1px; background: rgba(201, 169, 97, 0.3); }
+    .stat-number { font-family: var(--font-display); font-size: 64px; font-weight: 800; color: var(--gold); line-height: 1; margin-bottom: 12px; }
+    .stat-suffix { font-size: 32px; color: var(--gold); }
+    .stat-label { font-size: 14px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.9; font-weight: 500; }
 
-    .fade-in {
-        opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 0.8s, transform 0.8s;
-    }
+    /* NEWS - Tin tức có ảnh thật */
+    .news { background: var(--cream); }
+    .news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .news-card { background: var(--white); border-radius: 8px; overflow: hidden; transition: all 0.4s; box-shadow: var(--shadow-sm); cursor: pointer; display: flex; flex-direction: column; }
+    .news-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+    .news-image { height: 220px; position: relative; overflow: hidden; background: var(--navy); }
+    .news-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
+    .news-card:hover .news-image img { transform: scale(1.08); }
+    .news-date { position: absolute; top: 16px; left: 16px; background: var(--gold); color: var(--navy-dark); padding: 6px 14px; border-radius: 4px; font-size: 12px; font-weight: 700; letter-spacing: 0.5px; z-index: 2; box-shadow: var(--shadow-sm); }
+    .news-content { padding: 24px; flex-grow: 1; display: flex; flex-direction: column; }
+    .news-category { color: var(--gold-dark); font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; }
+    .news-title { font-family: var(--font-display); font-size: 19px; color: var(--navy); font-weight: 700; line-height: 1.4; margin-bottom: 12px; }
+    .news-excerpt { color: var(--gray-600); font-size: 14px; line-height: 1.6; margin-bottom: 16px; flex-grow: 1; }
+    .news-link { color: var(--navy); text-decoration: none; font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; transition: gap 0.3s, color 0.3s; margin-top: auto; }
+    .news-link:hover { gap: 12px; color: var(--gold-dark); }
 
-    .fade-in.visible {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    /* NEWSLETTER */
+    .newsletter { background: var(--navy); color: var(--white); padding: 80px 0; position: relative; overflow: hidden; }
+    .newsletter::before { content: ''; position: absolute; inset: 0; background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"><path d="M0,40 L40,0 L80,40 L40,80 Z" fill="none" stroke="%23C9A961" stroke-width="0.5" opacity="0.2"/></svg>'); background-size: 80px 80px; opacity: 0.5; }
+    .newsletter-content { max-width: 800px; margin: 0 auto; text-align: center; padding: 0 24px; position: relative; z-index: 2; }
+    .newsletter h2 { font-family: var(--font-display); font-size: 38px; margin-bottom: 16px; }
+    .newsletter p { font-size: 16px; opacity: 0.9; margin-bottom: 32px; }
+    .newsletter-form { display: flex; gap: 12px; max-width: 500px; margin: 0 auto; }
+    .newsletter-form input { flex: 1; padding: 14px 20px; border: none; border-radius: 4px; font-family: var(--font-body); font-size: 15px; }
+    .newsletter-form input:focus { outline: 2px solid var(--gold); }
 
-    /* ===== RESPONSIVE ===== */
+    /* FOOTER */
+    .footer { background: var(--navy-dark); color: var(--white); padding: 64px 0 0; }
+    .footer-grid { max-width: 1280px; margin: 0 auto; padding: 0 24px; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 48px; margin-bottom: 48px; }
+    .footer-col h4 { font-family: var(--font-display); color: var(--gold); font-size: 18px; margin-bottom: 20px; position: relative; padding-bottom: 12px; }
+    .footer-col h4::after { content: ''; position: absolute; left: 0; bottom: 0; width: 40px; height: 2px; background: var(--gold); }
+    .footer-about { display: flex; flex-direction: column; gap: 20px; }
+    .footer-logo { display: flex; align-items: center; gap: 12px; }
+    .footer-logo img { height: 56px; width: auto; filter: brightness(1.1); }
+    .footer-logo-text { font-family: var(--font-display); font-size: 17px; font-weight: 700; color: var(--white); line-height: 1.2; }
+    .footer-logo-text small { display: block; font-size: 11px; font-weight: 400; font-style: italic; opacity: 0.7; margin-top: 2px; }
+    .footer-desc { font-size: 14px; line-height: 1.7; opacity: 0.8; }
+    .footer-social { display: flex; gap: 12px; margin-top: 8px; }
+    .footer-social a { width: 40px; height: 40px; background: rgba(201, 169, 97, 0.15); border: 1px solid var(--gold); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: var(--gold); text-decoration: none; transition: all 0.3s; }
+    .footer-social a:hover { background: var(--gold); color: var(--navy-dark); }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 12px; }
+    .footer-links a { color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 14px; transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px; }
+    .footer-links a::before { content: '›'; color: var(--gold); font-weight: bold; }
+    .footer-links a:hover { color: var(--gold); padding-left: 4px; }
+    .footer-contact-item { display: flex; gap: 14px; margin-bottom: 16px; font-size: 14px; align-items: flex-start; }
+    .footer-contact-item i { color: var(--gold); margin-top: 4px; font-size: 16px; min-width: 16px; }
+    .footer-contact-item span { opacity: 0.9; line-height: 1.6; }
+    .footer-bottom { border-top: 1px solid rgba(255, 255, 255, 0.1); padding: 24px; text-align: center; font-size: 13px; opacity: 0.7; }
+    .footer-bottom a { color: var(--gold); text-decoration: none; }
+
+    /* ANIMATIONS */
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.8s, transform 0.8s; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
     @media (max-width: 1024px) {
         .hero-content { grid-template-columns: 1fr; }
         .hero-title { font-size: 40px; }
         .about-grid { grid-template-columns: 1fr; }
+        .ema-grid { grid-template-columns: 1fr; }
         .fields-grid { grid-template-columns: repeat(2, 1fr); }
         .research-grid { grid-template-columns: 1fr 1fr; height: auto; }
         .research-card.large { grid-row: span 1; }
-        .leaders-grid { grid-template-columns: 1fr; }
+        .members-grid { grid-template-columns: repeat(3, 1fr); }
         .news-grid { grid-template-columns: 1fr; }
         .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 48px; }
         .footer-grid { grid-template-columns: 1fr 1fr; }
         .section-title { font-size: 32px; }
+        .chairman-card { flex-direction: column; text-align: center; }
+        .org-units { grid-template-columns: repeat(3, 1fr); }
+        .org-units > *:nth-child(n+4) { margin-top: 14px; }
     }
 
     @media (max-width: 768px) {
@@ -1341,27 +420,24 @@
         .hero-title { font-size: 32px; }
         .hero { height: auto; padding: 60px 0; }
         .newsletter-form { flex-direction: column; }
+        .members-grid { grid-template-columns: repeat(2, 1fr); }
+        .org-units { grid-template-columns: repeat(2, 1fr); }
+        .ema-logo-big { padding: 30px; }
+        .ema-content h2 { font-size: 28px; }
+        .chairman-card { padding: 24px; }
+        .chairman-photo { width: 140px; height: 140px; }
     }
 </style>
 </head>
 <body>
 
-<!-- ===== TOP BAR ===== -->
+<!-- TOP BAR -->
 <div class="top-bar">
     <div class="top-bar-content">
         <div class="top-bar-info">
-            <span data-vn="Ô số 7-ĐG1, Khu đấu giá QSĐ, phường Đại Mỗ, Hà Nội" data-en="Plot No. 7-DG1, Land Auction Area, Dai Mo Ward, Hanoi">
-                <i class="fa-solid fa-location-dot"></i>
-                <span class="lang-text">Ô số 7-ĐG1, Khu đấu giá QSĐ, phường Đại Mỗ, Hà Nội</span>
-            </span>
-            <span>
-                <i class="fa-solid fa-phone"></i>
-                081.623.1059
-            </span>
-            <span>
-                <i class="fa-solid fa-envelope"></i>
-                vienkinhteptqh@gmail.com
-            </span>
+            <span><i class="fa-solid fa-location-dot"></i>Ô số 7-ĐG1, Khu đấu giá QSĐ, phường Đại Mỗ, Hà Nội</span>
+            <span><i class="fa-solid fa-phone"></i>081.623.1059</span>
+            <span><i class="fa-solid fa-envelope"></i>vienkinhteptqh@gmail.com</span>
         </div>
         <div class="lang-switcher">
             <button class="lang-btn active" data-lang="vn">VN</button>
@@ -1370,73 +446,74 @@
     </div>
 </div>
 
-<!-- ===== HEADER / NAV ===== -->
+<!-- HEADER -->
 <header class="header">
     <div class="nav-container">
         <div class="logo-area">
             <img src="logo_idep.jpg" alt="IDEP Logo" />
             <div class="logo-text">
-                <div class="name-vn" data-vn="VIỆN KINH TẾ PHÁT TRIỂN VÀ QUY HOẠCH" data-en="INSTITUTE OF DEVELOPMENT ECONOMICS AND PLANNING">VIỆN KINH TẾ PHÁT TRIỂN VÀ QUY HOẠCH</div>
-                <div class="name-en" data-vn="Institute of Development Economics and Planning" data-en="Viện Kinh tế Phát triển và Quy hoạch">Institute of Development Economics and Planning</div>
+                <div class="name-vn">VIỆN KINH TẾ PHÁT TRIỂN VÀ QUY HOẠCH</div>
+                <div class="name-en">Institute of Development Economics and Planning</div>
             </div>
         </div>
         <nav class="main-nav">
-            <a href="#home" class="active" data-vn="Trang chủ" data-en="Home">Trang chủ</a>
-            <a href="#about" data-vn="Về Viện" data-en="About">Về Viện</a>
-            <a href="#research" data-vn="Nghiên cứu" data-en="Research">Nghiên cứu</a>
-            <a href="#academy" data-vn="Học viện" data-en="Academy">Học viện</a>
-            <a href="#projects" data-vn="Dự án" data-en="Projects">Dự án</a>
-            <a href="#news" data-vn="Tin tức" data-en="News">Tin tức</a>
-            <a href="#contact" class="nav-cta" data-vn="Liên hệ" data-en="Contact">Liên hệ</a>
+            <a href="#home" class="active">Trang chủ</a>
+            <a href="#about">Về Viện</a>
+            <a href="#organization">Cơ cấu</a>
+            <a href="#leadership">Hội đồng Viện</a>
+            <a href="#ema">Học viện EMA</a>
+            <a href="#research">Dự án</a>
+            <a href="#news">Tin tức</a>
+            <a href="#contact" class="nav-cta">Liên hệ</a>
         </nav>
     </div>
 </header>
 
-<!-- ===== HERO ===== -->
+<!-- HERO -->
 <section class="hero" id="home">
     <div class="hero-pattern"></div>
     <div class="hero-content">
         <div class="hero-text">
             <div class="hero-badge">
                 <i class="fa-solid fa-award"></i>
-                <span data-vn="Tổ chức khoa học & công nghệ" data-en="Science & Technology Organization">Tổ chức khoa học & công nghệ</span>
+                <span>Tổ chức khoa học & công nghệ</span>
             </div>
-            <h1 class="hero-title" data-vn="Kiến tạo tầm nhìn<br><span class='highlight'>Quy hoạch thông minh</span>" data-en="Shaping visions<br><span class='highlight'>Smart planning</span>">
+            <h1 class="hero-title">
                 Kiến tạo tầm nhìn<br>
                 <span class="highlight">Quy hoạch thông minh</span>
             </h1>
-            <p class="hero-subtitle" data-vn="Viện Kinh tế Phát triển và Quy hoạch (IDEP) — tổ chức nghiên cứu và tư vấn hàng đầu về kinh tế phát triển, quy hoạch, đổi mới sáng tạo và chuyển đổi số tại Việt Nam." data-en="The Institute of Development Economics and Planning (IDEP) — a leading research and consulting organization in development economics, planning, innovation, and digital transformation in Vietnam.">
+            <p class="hero-subtitle">
                 Viện Kinh tế Phát triển và Quy hoạch (IDEP) — tổ chức nghiên cứu và tư vấn hàng đầu về kinh tế phát triển, quy hoạch, đổi mới sáng tạo và chuyển đổi số tại Việt Nam.
             </p>
             <div class="hero-cta">
                 <a href="#about" class="btn-primary">
-                    <span data-vn="Tìm hiểu về Viện" data-en="Learn more">Tìm hiểu về Viện</span>
+                    <span>Tìm hiểu về Viện</span>
                     <i class="fa-solid fa-arrow-right"></i>
                 </a>
-                <a href="#research" class="btn-secondary">
-                    <i class="fa-solid fa-book"></i>
-                    <span data-vn="Nghiên cứu mới" data-en="Latest research">Nghiên cứu mới</span>
+                <a href="#ema" class="btn-secondary">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <span>Học viện EMA</span>
                 </a>
             </div>
         </div>
 
         <div class="hero-card">
-            <div class="hero-card-label" data-vn="BÁO CÁO NỔI BẬT" data-en="FEATURED REPORT">BÁO CÁO NỔI BẬT</div>
-            <h3 class="hero-card-title" data-vn="Kế hoạch phát triển nhân lực KH&CN tỉnh Ninh Bình giai đoạn 2026-2030" data-en="Science & Technology Human Resources Development Plan for Ninh Binh Province 2026-2030">
-                Kế hoạch phát triển nhân lực KH&CN tỉnh Ninh Bình giai đoạn 2026-2030
+            <div class="hero-card-label">HOẠT ĐỘNG NỔI BẬT</div>
+            <h3 class="hero-card-title">
+                Thẩm định Điều chỉnh Quy hoạch tỉnh Cao Bằng thời kỳ 2021-2030, tầm nhìn đến năm 2050
             </h3>
-            <p class="hero-card-desc" data-vn="Nghiên cứu toàn diện về chiến lược phát triển nguồn nhân lực khoa học và công nghệ, đáp ứng yêu cầu đổi mới sáng tạo của địa phương." data-en="A comprehensive study on the strategy for developing science and technology human resources to meet local innovation needs.">
-                Nghiên cứu toàn diện về chiến lược phát triển nguồn nhân lực khoa học và công nghệ, đáp ứng yêu cầu đổi mới sáng tạo của địa phương.
+            <p class="hero-card-desc">
+                PGS.TS. Nguyễn An Thịnh — Chủ tịch Hội đồng Viện — tham gia Phiên họp thẩm định với UBND tỉnh Cao Bằng, đóng góp chuyên môn về định hướng phát triển vùng và quy hoạch lãnh thổ.
             </p>
-            <a href="#" class="hero-card-link">
-                <span data-vn="Xem chi tiết" data-en="Read more">Xem chi tiết</span>
+            <a href="#news" class="hero-card-link">
+                <span>Xem chi tiết</span>
                 <i class="fa-solid fa-arrow-right"></i>
             </a>
         </div>
     </div>
 </section>
 
-<!-- ===== ABOUT ===== -->
+<!-- ABOUT -->
 <section class="section about" id="about">
     <div class="section-container">
         <div class="about-grid">
@@ -1444,44 +521,94 @@
                 <div class="about-image">
                     <div class="about-image-content">
                         <i class="fa-solid fa-building-columns"></i>
-                        <h3 data-vn="Kể từ năm 2025" data-en="Since 2025">Kể từ năm 2025</h3>
-                        <p data-vn="Giấy CN KH&CN số C-33/2025/ĐK-KH&CN" data-en="Certificate No. C-33/2025/ĐK-KH&CN">Giấy CN KH&CN số C-33/2025/ĐK-KH&CN</p>
+                        <h3>Kể từ năm 2025</h3>
+                        <p>Giấy CN KH&CN số C-33/2025/ĐK-KH&CN do Sở KH&CN Hà Nội cấp</p>
                     </div>
                 </div>
                 <div class="about-badge">
                     <div class="number">IDEP</div>
-                    <div class="label" data-vn="Viện nghiên cứu" data-en="Research Institute">Viện nghiên cứu</div>
+                    <div class="label">Viện nghiên cứu</div>
                 </div>
             </div>
 
             <div class="about-text">
-                <span class="section-tag" data-vn="VỀ CHÚNG TÔI" data-en="ABOUT US">VỀ CHÚNG TÔI</span>
-                <h2 data-vn="Trung tâm tri thức liên ngành về kinh tế và quy hoạch" data-en="An interdisciplinary knowledge hub for economics and planning">
-                    Trung tâm tri thức liên ngành về kinh tế và quy hoạch
-                </h2>
-                <p data-vn="Viện Kinh tế Phát triển và Quy hoạch (IDEP) là tổ chức khoa học và công nghệ, hoạt động theo cơ chế tự chủ, không vì mục tiêu lợi nhuận, với sứ mệnh cung cấp cơ sở khoa học và thực tiễn phục vụ hoạch định chính sách, chiến lược và quy hoạch phát triển kinh tế – xã hội." data-en="IDEP is a science and technology organization operating on a self-governing, non-profit basis, with a mission to provide scientific and practical foundations for policy planning, strategy formulation, and socio-economic development.">
+                <span class="section-tag">VỀ CHÚNG TÔI</span>
+                <h2>Trung tâm tri thức liên ngành về kinh tế và quy hoạch</h2>
+                <p>
                     Viện Kinh tế Phát triển và Quy hoạch (IDEP) là tổ chức khoa học và công nghệ, hoạt động theo cơ chế tự chủ, không vì mục tiêu lợi nhuận, với sứ mệnh cung cấp cơ sở khoa học và thực tiễn phục vụ hoạch định chính sách, chiến lược và quy hoạch phát triển kinh tế – xã hội.
                 </p>
-                <p data-vn="Với đội ngũ chuyên gia liên ngành giàu kinh nghiệm, Viện triển khai nghiên cứu học thuật có giá trị, gắn kết chặt chẽ với thực tiễn phát triển, đồng thời là trung tâm tư vấn, đào tạo và chuyển giao công nghệ." data-en="With an experienced interdisciplinary team of experts, the Institute conducts valuable academic research closely linked to development practice, while serving as a center for consulting, training, and technology transfer.">
+                <p>
                     Với đội ngũ chuyên gia liên ngành giàu kinh nghiệm, Viện triển khai nghiên cứu học thuật có giá trị, gắn kết chặt chẽ với thực tiễn phát triển, đồng thời là trung tâm tư vấn, đào tạo và chuyển giao công nghệ.
                 </p>
 
                 <div class="about-features">
-                    <div class="about-feature">
-                        <i class="fa-solid fa-check-circle"></i>
-                        <span data-vn="Khoa học – Khách quan" data-en="Scientific – Objective">Khoa học – Khách quan</span>
+                    <div class="about-feature"><i class="fa-solid fa-check-circle"></i><span>Khoa học – Khách quan</span></div>
+                    <div class="about-feature"><i class="fa-solid fa-check-circle"></i><span>Đổi mới – Sáng tạo</span></div>
+                    <div class="about-feature"><i class="fa-solid fa-check-circle"></i><span>Ứng dụng – Hiệu quả</span></div>
+                    <div class="about-feature"><i class="fa-solid fa-check-circle"></i><span>Hợp tác – Kết nối</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ORG CHART - SƠ ĐỒ TỔ CHỨC -->
+<section class="section org-chart" id="organization">
+    <div class="section-container">
+        <div class="section-header">
+            <div class="section-tag">CƠ CẤU TỔ CHỨC</div>
+            <h2 class="section-title">Sơ đồ tổ chức Viện</h2>
+            <p class="section-subtitle">
+                Viện IDEP có cơ cấu tổ chức 3 cấp với Hội đồng Viện, Ban Lãnh đạo điều hành và 9 đơn vị chuyên môn trực thuộc.
+            </p>
+        </div>
+
+        <div class="org-wrapper">
+            <div class="org-tree">
+                <div class="org-node top">HỘI ĐỒNG VIỆN</div>
+                <div class="org-connector"></div>
+                <div class="org-node">VIỆN TRƯỞNG</div>
+                <div class="org-connector"></div>
+                <div class="org-node">PHÓ VIỆN TRƯỞNG</div>
+            </div>
+
+            <div class="org-branches">
+                <div class="org-units">
+                    <div class="org-unit">
+                        <i class="fa-solid fa-briefcase"></i>
+                        <span>Văn phòng</span>
                     </div>
-                    <div class="about-feature">
-                        <i class="fa-solid fa-check-circle"></i>
-                        <span data-vn="Đổi mới – Sáng tạo" data-en="Innovation – Creativity">Đổi mới – Sáng tạo</span>
+                    <div class="org-unit">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                        <span>Học viện Đào tạo Kinh tế và Quản lý</span>
                     </div>
-                    <div class="about-feature">
-                        <i class="fa-solid fa-check-circle"></i>
-                        <span data-vn="Ứng dụng – Hiệu quả" data-en="Application – Effectiveness">Ứng dụng – Hiệu quả</span>
+                    <div class="org-unit">
+                        <i class="fa-solid fa-leaf"></i>
+                        <span>Ban Quản lý Tài nguyên và Môi trường</span>
                     </div>
-                    <div class="about-feature">
-                        <i class="fa-solid fa-check-circle"></i>
-                        <span data-vn="Hợp tác – Kết nối" data-en="Cooperation – Connection">Hợp tác – Kết nối</span>
+                    <div class="org-unit">
+                        <i class="fa-solid fa-city"></i>
+                        <span>Ban Quy hoạch Môi trường và Hạ tầng</span>
+                    </div>
+                    <div class="org-unit">
+                        <i class="fa-solid fa-map-location-dot"></i>
+                        <span>Ban Kinh tế Quản lý đất đai, du lịch và bất động sản</span>
+                    </div>
+                    <div class="org-unit">
+                        <i class="fa-solid fa-satellite"></i>
+                        <span>Ban Công nghệ Địa thông tin và cảnh quan</span>
+                    </div>
+                    <div class="org-unit">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <span>Ban Kinh tế phát triển</span>
+                    </div>
+                    <div class="org-unit">
+                        <i class="fa-solid fa-lightbulb"></i>
+                        <span>Ban Đổi mới sáng tạo và chuyển đổi số</span>
+                    </div>
+                    <div class="org-unit">
+                        <i class="fa-solid fa-scale-balanced"></i>
+                        <span>Ban Pháp luật Quy hoạch và Đất đai</span>
                     </div>
                 </div>
             </div>
@@ -1489,15 +616,13 @@
     </div>
 </section>
 
-<!-- ===== LĨNH VỰC HOẠT ĐỘNG ===== -->
+<!-- FIELDS -->
 <section class="section fields">
     <div class="section-container">
         <div class="section-header">
-            <div class="section-tag" data-vn="LĨNH VỰC CHUYÊN MÔN" data-en="EXPERTISE">LĨNH VỰC CHUYÊN MÔN</div>
-            <h2 class="section-title" data-vn="Các lĩnh vực hoạt động trọng tâm" data-en="Core areas of activity">
-                Các lĩnh vực hoạt động trọng tâm
-            </h2>
-            <p class="section-subtitle" data-vn="Viện tập trung triển khai các hoạt động khoa học – công nghệ và tư vấn trong bốn lĩnh vực chủ chốt." data-en="The Institute focuses on science, technology, and consulting activities in four key areas.">
+            <div class="section-tag">LĨNH VỰC CHUYÊN MÔN</div>
+            <h2 class="section-title">Các lĩnh vực hoạt động trọng tâm</h2>
+            <p class="section-subtitle">
                 Viện tập trung triển khai các hoạt động khoa học – công nghệ và tư vấn trong bốn lĩnh vực chủ chốt.
             </p>
         </div>
@@ -1505,48 +630,96 @@
         <div class="fields-grid">
             <div class="field-card">
                 <div class="field-icon"><i class="fa-solid fa-microscope"></i></div>
-                <h3 data-vn="Nghiên cứu khoa học" data-en="Scientific Research">Nghiên cứu khoa học</h3>
-                <p data-vn="Kinh tế bền vững, kinh tế xanh, kinh tế tuần hoàn, kinh tế số; năng lượng tái tạo, ứng phó biến đổi khí hậu; quy hoạch phát triển đô thị – nông thôn thông minh." data-en="Sustainable, green, circular, and digital economy; renewable energy, climate change response; smart urban and rural planning.">
-                    Kinh tế bền vững, kinh tế xanh, kinh tế tuần hoàn, kinh tế số; năng lượng tái tạo, ứng phó biến đổi khí hậu; quy hoạch phát triển đô thị – nông thôn thông minh.
-                </p>
+                <h3>Nghiên cứu khoa học</h3>
+                <p>Kinh tế bền vững, kinh tế xanh, kinh tế tuần hoàn, kinh tế số; năng lượng tái tạo, ứng phó biến đổi khí hậu; quy hoạch phát triển đô thị – nông thôn thông minh.</p>
             </div>
-
             <div class="field-card">
                 <div class="field-icon"><i class="fa-solid fa-chart-line"></i></div>
-                <h3 data-vn="Tư vấn & Dịch vụ KH-CN" data-en="S&T Consulting & Services">Tư vấn & Dịch vụ KH-CN</h3>
-                <p data-vn="Tư vấn chiến lược phát triển kinh tế – xã hội, quy hoạch và quản lý; hỗ trợ doanh nghiệp xây dựng mô hình phát triển bền vững, chuyển đổi số." data-en="Strategic consulting on socio-economic development, planning, and management; supporting enterprises in sustainable development models and digital transformation.">
-                    Tư vấn chiến lược phát triển kinh tế – xã hội, quy hoạch và quản lý; hỗ trợ doanh nghiệp xây dựng mô hình phát triển bền vững, chuyển đổi số.
-                </p>
+                <h3>Tư vấn & Dịch vụ KH-CN</h3>
+                <p>Tư vấn chiến lược phát triển kinh tế – xã hội, quy hoạch và quản lý; hỗ trợ doanh nghiệp xây dựng mô hình phát triển bền vững, chuyển đổi số.</p>
             </div>
-
             <div class="field-card">
                 <div class="field-icon"><i class="fa-solid fa-graduation-cap"></i></div>
-                <h3 data-vn="Đào tạo & Phát triển" data-en="Training & Development">Đào tạo & Phát triển</h3>
-                <p data-vn="Tổ chức các khóa đào tạo, tập huấn, bồi dưỡng nghiệp vụ về kinh tế phát triển, quy hoạch, quản lý và công nghệ mới cho cán bộ, chuyên gia." data-en="Organizing training courses on development economics, planning, management, and new technologies for officials, experts, and enterprises.">
-                    Tổ chức các khóa đào tạo, tập huấn, bồi dưỡng nghiệp vụ về kinh tế phát triển, quy hoạch, quản lý và công nghệ mới cho cán bộ, chuyên gia.
-                </p>
+                <h3>Đào tạo & Phát triển</h3>
+                <p>Tổ chức các khóa đào tạo, tập huấn, bồi dưỡng nghiệp vụ về kinh tế phát triển, quy hoạch, quản lý và công nghệ mới cho cán bộ, chuyên gia.</p>
             </div>
-
             <div class="field-card">
                 <div class="field-icon"><i class="fa-solid fa-globe"></i></div>
-                <h3 data-vn="Hợp tác Quốc tế" data-en="International Cooperation">Hợp tác Quốc tế</h3>
-                <p data-vn="Liên kết với các cơ quan, tổ chức, trường đại học, viện nghiên cứu trong và ngoài nước; tham gia mạng lưới tri thức toàn cầu, chuyển giao công nghệ." data-en="Partnering with domestic and international agencies, organizations, universities, and research institutes; joining global knowledge networks and technology transfer.">
-                    Liên kết với các cơ quan, tổ chức, trường đại học, viện nghiên cứu trong và ngoài nước; tham gia mạng lưới tri thức toàn cầu, chuyển giao công nghệ.
-                </p>
+                <h3>Hợp tác Quốc tế</h3>
+                <p>Liên kết với các cơ quan, tổ chức, trường đại học, viện nghiên cứu trong và ngoài nước; tham gia mạng lưới tri thức toàn cầu, chuyển giao công nghệ.</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ===== NGHIÊN CỨU NỔI BẬT ===== -->
+<!-- EMA ACADEMY -->
+<section class="section ema-section" id="ema">
+    <div class="section-container">
+        <div class="ema-grid">
+            <div class="ema-visual">
+                <div class="ema-logo-big">
+                    <img src="logo_ema.png" alt="EMA - Economics & Management Academy" />
+                </div>
+                <div class="ema-columns-deco">— TRI THỨC • HỌC THUẬT • UY TÍN —</div>
+            </div>
+
+            <div class="ema-content">
+                <span class="section-tag">ĐƠN VỊ ĐÀO TẠO CHUYÊN BIỆT</span>
+                <h2>Học viện Đào tạo Kinh tế và Quản lý</h2>
+                <div class="ema-tagline">Economics & Management Academy — Đào tạo thế hệ lãnh đạo tương lai</div>
+                <p>
+                    Học viện EMA là đơn vị đào tạo chuyên biệt trực thuộc Viện IDEP, được thành lập với sứ mệnh đào tạo, bồi dưỡng nguồn nhân lực chất lượng cao trong lĩnh vực kinh tế, quản lý, quy hoạch và chính sách công cho cán bộ quản lý, chuyên gia và doanh nghiệp.
+                </p>
+
+                <div class="ema-features">
+                    <div class="ema-feature">
+                        <i class="fa-solid fa-certificate"></i>
+                        <div class="ema-feature-text">
+                            <strong>Chương trình chuẩn</strong>
+                            <span>Chứng chỉ được công nhận</span>
+                        </div>
+                    </div>
+                    <div class="ema-feature">
+                        <i class="fa-solid fa-user-graduate"></i>
+                        <div class="ema-feature-text">
+                            <strong>Giảng viên uy tín</strong>
+                            <span>PGS, TS hàng đầu</span>
+                        </div>
+                    </div>
+                    <div class="ema-feature">
+                        <i class="fa-solid fa-laptop"></i>
+                        <div class="ema-feature-text">
+                            <strong>Phương pháp hiện đại</strong>
+                            <span>Online và trực tiếp</span>
+                        </div>
+                    </div>
+                    <div class="ema-feature">
+                        <i class="fa-solid fa-handshake"></i>
+                        <div class="ema-feature-text">
+                            <strong>Thực hành thực tế</strong>
+                            <span>Case study từ dự án thật</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ema-cta-group">
+                    <a href="#" class="btn-primary">
+                        <span>Xem các khóa học</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- RESEARCH / PROJECTS -->
 <section class="section research" id="research">
     <div class="section-container">
         <div class="section-header">
-            <div class="section-tag" data-vn="NGHIÊN CỨU NỔI BẬT" data-en="FEATURED RESEARCH">NGHIÊN CỨU NỔI BẬT</div>
-            <h2 class="section-title" data-vn="Các công trình và dự án tiêu biểu" data-en="Notable works and projects">
-                Các công trình và dự án tiêu biểu
-            </h2>
-            <p class="section-subtitle" data-vn="Các đề tài, dự án đã và đang được Viện triển khai, đóng góp thiết thực vào phát triển bền vững." data-en="Research projects that IDEP has implemented, contributing substantially to sustainable development.">
+            <div class="section-tag">DỰ ÁN TIÊU BIỂU</div>
+            <h2 class="section-title">Các công trình và dự án</h2>
+            <p class="section-subtitle">
                 Các đề tài, dự án đã và đang được Viện triển khai, đóng góp thiết thực vào phát triển bền vững.
             </p>
         </div>
@@ -1556,13 +729,8 @@
                 <div class="research-card-bg"></div>
                 <div class="research-pattern"></div>
                 <div class="research-card-content">
-                    <div class="research-category">
-                        <i class="fa-solid fa-star"></i>
-                        <span data-vn="Nổi bật" data-en="Featured">Nổi bật</span>
-                    </div>
-                    <h3 data-vn="Xây dựng Sổ tay Hệ giá trị xanh — Cẩm nang sống xanh tại tỉnh Khánh Hòa" data-en="Developing the Green Values Handbook — Green Living Guide in Khanh Hoa Province">
-                        Xây dựng Sổ tay Hệ giá trị xanh — Cẩm nang sống xanh tại tỉnh Khánh Hòa
-                    </h3>
+                    <div class="research-category"><i class="fa-solid fa-star"></i><span>Nổi bật</span></div>
+                    <h3>Xây dựng Sổ tay Hệ giá trị xanh — Cẩm nang sống xanh tại tỉnh Khánh Hòa</h3>
                     <div class="research-meta">
                         <span><i class="fa-regular fa-calendar"></i> 10-12/2025</span>
                         <span><i class="fa-solid fa-building"></i> Sở NN&MT Khánh Hòa</span>
@@ -1574,10 +742,8 @@
                 <div class="research-card-bg"></div>
                 <div class="research-pattern"></div>
                 <div class="research-card-content">
-                    <div class="research-category" data-vn="Môi trường" data-en="Environment">Môi trường</div>
-                    <h3 data-vn="Tuyên truyền phổ biến Kỹ năng xanh — Thực hành sống xanh" data-en="Green Skills Awareness — Green Living Practice">
-                        Tuyên truyền phổ biến Kỹ năng xanh — Thực hành sống xanh
-                    </h3>
+                    <div class="research-category">Môi trường</div>
+                    <h3>Tuyên truyền phổ biến Kỹ năng xanh — Thực hành sống xanh</h3>
                     <div class="research-meta">
                         <span><i class="fa-regular fa-calendar"></i> 2025</span>
                     </div>
@@ -1588,10 +754,8 @@
                 <div class="research-card-bg"></div>
                 <div class="research-pattern"></div>
                 <div class="research-card-content">
-                    <div class="research-category" data-vn="Đào tạo" data-en="Training">Đào tạo</div>
-                    <h3 data-vn="Tập huấn Sở hữu trí tuệ tại Ninh Bình" data-en="IP Training in Ninh Binh">
-                        Tập huấn Sở hữu trí tuệ tại Ninh Bình
-                    </h3>
+                    <div class="research-category">Đào tạo</div>
+                    <h3>Tập huấn Sở hữu trí tuệ tại Ninh Bình</h3>
                     <div class="research-meta">
                         <span><i class="fa-regular fa-calendar"></i> 12/2025</span>
                     </div>
@@ -1602,10 +766,8 @@
                 <div class="research-card-bg"></div>
                 <div class="research-pattern"></div>
                 <div class="research-card-content">
-                    <div class="research-category" data-vn="Công nghệ" data-en="Technology">Công nghệ</div>
-                    <h3 data-vn="Ứng dụng AI cho doanh nghiệp Ninh Bình" data-en="AI Applications for Ninh Binh Enterprises">
-                        Ứng dụng AI cho doanh nghiệp Ninh Bình
-                    </h3>
+                    <div class="research-category">Công nghệ</div>
+                    <h3>Ứng dụng AI cho doanh nghiệp Ninh Bình</h3>
                     <div class="research-meta">
                         <span><i class="fa-regular fa-calendar"></i> 12/2025</span>
                     </div>
@@ -1616,10 +778,8 @@
                 <div class="research-card-bg"></div>
                 <div class="research-pattern"></div>
                 <div class="research-card-content">
-                    <div class="research-category" data-vn="Tư vấn" data-en="Consulting">Tư vấn</div>
-                    <h3 data-vn="R&D Chuỗi cửa hàng thực phẩm an toàn" data-en="R&D for Safe Food Retail Chain">
-                        R&D Chuỗi cửa hàng thực phẩm an toàn
-                    </h3>
+                    <div class="research-category">Tư vấn</div>
+                    <h3>R&D Chuỗi cửa hàng thực phẩm an toàn Hải Thịnh</h3>
                     <div class="research-meta">
                         <span><i class="fa-regular fa-calendar"></i> 9-12/2025</span>
                     </div>
@@ -1629,149 +789,153 @@
     </div>
 </section>
 
-<!-- ===== STATS ===== -->
+<!-- STATS -->
 <section class="section stats">
     <div class="section-container">
         <div class="stats-grid">
             <div class="stat-item">
                 <div class="stat-number">16<span class="stat-suffix">+</span></div>
-                <div class="stat-label" data-vn="Chuyên gia - Nhà khoa học" data-en="Experts & Scientists">Chuyên gia - Nhà khoa học</div>
+                <div class="stat-label">Chuyên gia - Nhà khoa học</div>
             </div>
             <div class="stat-item">
-                <div class="stat-number">08<span class="stat-suffix"></span></div>
-                <div class="stat-label" data-vn="Ban & Đơn vị chuyên môn" data-en="Specialized Units">Ban & Đơn vị chuyên môn</div>
+                <div class="stat-number">09</div>
+                <div class="stat-label">Đơn vị chuyên môn</div>
             </div>
             <div class="stat-item">
                 <div class="stat-number">05<span class="stat-suffix">+</span></div>
-                <div class="stat-label" data-vn="Dự án đang thực hiện" data-en="Ongoing Projects">Dự án đang thực hiện</div>
+                <div class="stat-label">Dự án đang thực hiện</div>
             </div>
             <div class="stat-item">
                 <div class="stat-number">04</div>
-                <div class="stat-label" data-vn="Lĩnh vực trọng tâm" data-en="Core Fields">Lĩnh vực trọng tâm</div>
+                <div class="stat-label">Lĩnh vực trọng tâm</div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ===== LEADERSHIP ===== -->
-<section class="section leadership">
+<!-- LEADERSHIP - HỘI ĐỒNG VIỆN -->
+<section class="section leadership" id="leadership">
     <div class="section-container">
         <div class="section-header">
-            <div class="section-tag" data-vn="BAN LÃNH ĐẠO" data-en="LEADERSHIP">BAN LÃNH ĐẠO</div>
-            <h2 class="section-title" data-vn="Hội đồng Viện & Ban Lãnh đạo" data-en="Institute Council & Leadership">
-                Hội đồng Viện & Ban Lãnh đạo
-            </h2>
-            <p class="section-subtitle" data-vn="Đội ngũ chuyên gia giàu kinh nghiệm với trình độ học vấn cao, dẫn dắt Viện trên con đường phát triển." data-en="A team of experienced experts with high academic credentials, leading the Institute's development.">
+            <div class="section-tag">BAN LÃNH ĐẠO</div>
+            <h2 class="section-title">Hội đồng Viện</h2>
+            <p class="section-subtitle">
                 Đội ngũ chuyên gia giàu kinh nghiệm với trình độ học vấn cao, dẫn dắt Viện trên con đường phát triển.
             </p>
         </div>
 
-        <div class="leaders-grid">
-            <div class="leader-card">
-                <div class="leader-avatar">
-                    <i class="fa-solid fa-user-tie"></i>
-                </div>
-                <div class="leader-name">PGS.TS. Nguyễn An Thịnh</div>
-                <div class="leader-title" data-vn="Chủ tịch Hội đồng Viện" data-en="Chairman of the Institute Council">Chủ tịch Hội đồng Viện</div>
-                <div class="leader-bio" data-vn="Chuyên ngành Địa lý Tài nguyên và Môi trường" data-en="Specialization: Geography of Resources and Environment">
-                    Chuyên ngành Địa lý Tài nguyên và Môi trường
-                </div>
-            </div>
-
-            <div class="leader-card">
-                <div class="leader-avatar">
-                    <i class="fa-solid fa-user-tie"></i>
-                </div>
-                <div class="leader-name">TS. Hoàng Quốc Lâm</div>
-                <div class="leader-title" data-vn="Viện trưởng" data-en="Director">Viện trưởng</div>
-                <div class="leader-bio" data-vn="Chuyên ngành Quản lý Tài nguyên và Môi trường" data-en="Specialization: Resource and Environment Management">
-                    Chuyên ngành Quản lý Tài nguyên và Môi trường
+        <!-- Chủ tịch HĐV - Card nổi bật -->
+        <div class="chairman-wrapper">
+            <div class="chairman-card">
+                <img src="nguyen_an_thinh.jpg" alt="PGS.TS. Nguyễn An Thịnh" class="chairman-photo" />
+                <div class="chairman-info">
+                    <div class="chairman-badge">Chủ tịch Hội đồng Viện</div>
+                    <div class="chairman-name">PGS.TS. Nguyễn An Thịnh</div>
+                    <div class="chairman-title">Chuyên ngành Địa lý Tài nguyên và Môi trường</div>
+                    <div class="chairman-bio">
+                        Chủ trì định hướng chiến lược và hoạt động khoa học của Viện; trực tiếp tham gia các dự án tư vấn quy hoạch cấp tỉnh và nghiên cứu chính sách phát triển vùng.
+                    </div>
                 </div>
             </div>
+        </div>
 
-            <div class="leader-card">
-                <div class="leader-avatar">
-                    <i class="fa-solid fa-user-tie"></i>
-                </div>
-                <div class="leader-name">TS. Trần Quốc Toản</div>
-                <div class="leader-title" data-vn="Phó Viện trưởng" data-en="Deputy Director">Phó Viện trưởng</div>
-                <div class="leader-bio" data-vn="Chuyên ngành Kinh tế phát triển" data-en="Specialization: Development Economics">
-                    Chuyên ngành Kinh tế phát triển
-                </div>
+        <!-- 5 thành viên còn lại -->
+        <div class="members-grid">
+            <div class="member-card">
+                <img src="hoang_quoc_lam.jpg" alt="TS. Hoàng Quốc Lâm" class="member-photo" />
+                <div class="member-name">TS. Hoàng Quốc Lâm</div>
+                <div class="member-title">Viện trưởng</div>
+                <div class="member-spec">Quản lý Tài nguyên và Môi trường</div>
+            </div>
+            <div class="member-card">
+                <img src="tran_quoc_toan.jpg" alt="TS. Trần Quốc Toản" class="member-photo" />
+                <div class="member-name">TS. Trần Quốc Toản</div>
+                <div class="member-title">Phó Viện trưởng</div>
+                <div class="member-spec">Kinh tế phát triển</div>
+            </div>
+            <div class="member-card">
+                <img src="ta_van_hanh.jpg" alt="TS. Tạ Văn Hạnh" class="member-photo" />
+                <div class="member-name">TS. Tạ Văn Hạnh</div>
+                <div class="member-title">Phó Viện trưởng</div>
+                <div class="member-spec">Địa lý Tài nguyên và Môi trường</div>
+            </div>
+            <div class="member-card">
+                <img src="vu_van_khoat.jpg" alt="TS. Vũ Văn Khoát" class="member-photo" />
+                <div class="member-name">TS. Vũ Văn Khoát</div>
+                <div class="member-title">Phó Viện trưởng</div>
+                <div class="member-spec">Môi trường và Phát triển bền vững</div>
+            </div>
+            <div class="member-card">
+                <img src="nguyen_thi_mai_huong.jpg" alt="TS. Nguyễn Thị Mai Hương" class="member-photo" />
+                <div class="member-name">TS. Nguyễn Thị Mai Hương</div>
+                <div class="member-title">Phó Viện trưởng</div>
+                <div class="member-spec">Kinh tế phát triển</div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ===== NEWS ===== -->
+<!-- NEWS - TIN TỨC VỚI ẢNH THẬT -->
 <section class="section news" id="news">
     <div class="section-container">
         <div class="section-header">
-            <div class="section-tag" data-vn="TIN TỨC & SỰ KIỆN" data-en="NEWS & EVENTS">TIN TỨC & SỰ KIỆN</div>
-            <h2 class="section-title" data-vn="Tin tức mới nhất từ Viện" data-en="Latest news from the Institute">
-                Tin tức mới nhất từ Viện
-            </h2>
-            <p class="section-subtitle" data-vn="Cập nhật các hoạt động, sự kiện, hội thảo và công bố khoa học mới nhất." data-en="Updates on activities, events, seminars, and the latest scientific publications.">
-                Cập nhật các hoạt động, sự kiện, hội thảo và công bố khoa học mới nhất.
+            <div class="section-tag">TIN TỨC & SỰ KIỆN</div>
+            <h2 class="section-title">Hoạt động mới nhất của Viện</h2>
+            <p class="section-subtitle">
+                Cập nhật các hoạt động tư vấn, đào tạo, hội thảo và hợp tác của Viện trong thời gian gần đây.
             </p>
         </div>
 
         <div class="news-grid">
-            <article class="news-card news-1">
+            <article class="news-card">
                 <div class="news-image">
-                    <i class="fa-solid fa-leaf"></i>
-                    <div class="news-date">15.04.2026</div>
+                    <img src="thumb_caobang.jpg" alt="Thẩm định Quy hoạch tỉnh Cao Bằng" />
+                    <div class="news-date">11.02.2026</div>
                 </div>
                 <div class="news-content">
-                    <div class="news-category" data-vn="HỘI THẢO" data-en="SEMINAR">HỘI THẢO</div>
-                    <h3 class="news-title" data-vn="Hội thảo khoa học về Kinh tế tuần hoàn và Phát triển bền vững" data-en="Scientific Seminar on Circular Economy and Sustainable Development">
-                        Hội thảo khoa học về Kinh tế tuần hoàn và Phát triển bền vững
-                    </h3>
-                    <p class="news-excerpt" data-vn="Viện IDEP phối hợp tổ chức hội thảo quy tụ các chuyên gia đầu ngành thảo luận về mô hình kinh tế tuần hoàn..." data-en="IDEP co-organized a seminar bringing together leading experts to discuss circular economy models...">
-                        Viện IDEP phối hợp tổ chức hội thảo quy tụ các chuyên gia đầu ngành thảo luận về mô hình kinh tế tuần hoàn...
+                    <div class="news-category">TƯ VẤN QUY HOẠCH</div>
+                    <h3 class="news-title">Thẩm định Điều chỉnh Quy hoạch tỉnh Cao Bằng thời kỳ 2021-2030</h3>
+                    <p class="news-excerpt">
+                        PGS.TS. Nguyễn An Thịnh — Chủ tịch Hội đồng Viện IDEP — tham gia Phiên họp thẩm định Điều chỉnh Quy hoạch tỉnh Cao Bằng do UBND tỉnh chủ trì. Hoạt động thể hiện vai trò của Viện trong tư vấn chuyên môn cấp tỉnh về quy hoạch phát triển vùng.
                     </p>
                     <a href="#" class="news-link">
-                        <span data-vn="Đọc thêm" data-en="Read more">Đọc thêm</span>
+                        <span>Đọc thêm</span>
                         <i class="fa-solid fa-arrow-right"></i>
                     </a>
                 </div>
             </article>
 
-            <article class="news-card news-2">
+            <article class="news-card">
                 <div class="news-image">
-                    <i class="fa-solid fa-handshake"></i>
-                    <div class="news-date">10.04.2026</div>
+                    <img src="thumb_ai.jpg" alt="Tập huấn AI Ninh Bình" />
+                    <div class="news-date">12.2025</div>
                 </div>
                 <div class="news-content">
-                    <div class="news-category" data-vn="HỢP TÁC" data-en="COOPERATION">HỢP TÁC</div>
-                    <h3 class="news-title" data-vn="Ký kết Biên bản ghi nhớ hợp tác với Sở KH&CN tỉnh Ninh Bình" data-en="MOU Signed with Ninh Binh Department of Science & Technology">
-                        Ký kết Biên bản ghi nhớ hợp tác với Sở KH&CN tỉnh Ninh Bình
-                    </h3>
-                    <p class="news-excerpt" data-vn="Hợp tác chiến lược về phát triển nhân lực khoa học công nghệ giai đoạn 2026-2030, triển khai nhiều đề tài trọng điểm..." data-en="Strategic cooperation on science and technology human resources development for 2026-2030...">
-                        Hợp tác chiến lược về phát triển nhân lực khoa học công nghệ giai đoạn 2026-2030, triển khai nhiều đề tài trọng điểm...
+                    <div class="news-category">ĐÀO TẠO - CHUYỂN ĐỔI SỐ</div>
+                    <h3 class="news-title">Tập huấn Ứng dụng Trí tuệ nhân tạo (AI) cho doanh nghiệp Ninh Bình</h3>
+                    <p class="news-excerpt">
+                        Viện IDEP phối hợp với Sở KH&CN tỉnh Ninh Bình tổ chức khóa tập huấn ứng dụng AI trong quản lý, sản xuất và kinh doanh. PGS.TS. Nguyễn An Thịnh và TS. Hoàng Quốc Lâm trực tiếp truyền đạt kiến thức thực tiễn cho các doanh nghiệp địa phương.
                     </p>
                     <a href="#" class="news-link">
-                        <span data-vn="Đọc thêm" data-en="Read more">Đọc thêm</span>
+                        <span>Đọc thêm</span>
                         <i class="fa-solid fa-arrow-right"></i>
                     </a>
                 </div>
             </article>
 
-            <article class="news-card news-3">
+            <article class="news-card">
                 <div class="news-image">
-                    <i class="fa-solid fa-book-open"></i>
-                    <div class="news-date">05.04.2026</div>
+                    <img src="thumb_haithinh.jpg" alt="Lễ ký kết R&D Hải Thịnh" />
+                    <div class="news-date">27.11.2025</div>
                 </div>
                 <div class="news-content">
-                    <div class="news-category" data-vn="CÔNG BỐ" data-en="PUBLICATION">CÔNG BỐ</div>
-                    <h3 class="news-title" data-vn="Công bố báo cáo Đánh giá thực trạng Kinh tế Xanh tại các đô thị Việt Nam" data-en="Release of the Green Economy Assessment Report in Vietnamese Urban Areas">
-                        Công bố báo cáo Đánh giá thực trạng Kinh tế Xanh tại các đô thị Việt Nam
-                    </h3>
-                    <p class="news-excerpt" data-vn="Báo cáo toàn diện về tình hình phát triển kinh tế xanh tại 10 đô thị lớn, đề xuất các chính sách thúc đẩy..." data-en="A comprehensive report on green economy development in 10 major cities, proposing policy recommendations...">
-                        Báo cáo toàn diện về tình hình phát triển kinh tế xanh tại 10 đô thị lớn, đề xuất các chính sách thúc đẩy...
+                    <div class="news-category">HỢP TÁC DOANH NGHIỆP</div>
+                    <h3 class="news-title">Lễ ký kết hợp tác R&D với Công ty Cổ phần Dinh dưỡng Hải Thịnh</h3>
+                    <p class="news-excerpt">
+                        Viện IDEP và Công ty Cổ phần Dinh dưỡng Hải Thịnh chính thức ký kết hợp tác tư vấn phát triển chuỗi cửa hàng nông sản - thực phẩm an toàn. TS. Hoàng Quốc Lâm đại diện Viện ký kết thỏa thuận về định hướng R&D và mô hình phát triển bền vững.
                     </p>
                     <a href="#" class="news-link">
-                        <span data-vn="Đọc thêm" data-en="Read more">Đọc thêm</span>
+                        <span>Đọc thêm</span>
                         <i class="fa-solid fa-arrow-right"></i>
                     </a>
                 </div>
@@ -1780,24 +944,22 @@
     </div>
 </section>
 
-<!-- ===== NEWSLETTER ===== -->
+<!-- NEWSLETTER -->
 <section class="newsletter">
     <div class="newsletter-content">
-        <h2 data-vn="Đăng ký nhận bản tin" data-en="Subscribe to our newsletter">Đăng ký nhận bản tin</h2>
-        <p data-vn="Nhận các nghiên cứu mới, báo cáo chuyên đề và thông tin sự kiện từ Viện hàng tháng." data-en="Receive the latest research, thematic reports, and event information from the Institute monthly.">
-            Nhận các nghiên cứu mới, báo cáo chuyên đề và thông tin sự kiện từ Viện hàng tháng.
-        </p>
+        <h2>Đăng ký nhận bản tin</h2>
+        <p>Nhận các nghiên cứu mới, báo cáo chuyên đề và thông tin sự kiện từ Viện hàng tháng.</p>
         <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Cảm ơn bạn đã đăng ký!');">
             <input type="email" placeholder="email@example.com" required>
             <button type="submit" class="btn-primary">
-                <span data-vn="Đăng ký" data-en="Subscribe">Đăng ký</span>
+                <span>Đăng ký</span>
                 <i class="fa-solid fa-paper-plane"></i>
             </button>
         </form>
     </div>
 </section>
 
-<!-- ===== FOOTER ===== -->
+<!-- FOOTER -->
 <footer class="footer" id="contact">
     <div class="footer-grid">
         <div class="footer-col footer-about">
@@ -1808,7 +970,7 @@
                     <small>Viện Kinh tế Phát triển và Quy hoạch</small>
                 </div>
             </div>
-            <p class="footer-desc" data-vn="Viện Kinh tế Phát triển và Quy hoạch — Tổ chức nghiên cứu và tư vấn khoa học công nghệ hàng đầu về kinh tế phát triển, quy hoạch, đổi mới sáng tạo và chuyển đổi số tại Việt Nam." data-en="IDEP — A leading research and consulting organization in development economics, planning, innovation, and digital transformation in Vietnam.">
+            <p class="footer-desc">
                 Viện Kinh tế Phát triển và Quy hoạch — Tổ chức nghiên cứu và tư vấn khoa học công nghệ hàng đầu về kinh tế phát triển, quy hoạch, đổi mới sáng tạo và chuyển đổi số tại Việt Nam.
             </p>
             <div class="footer-social">
@@ -1820,32 +982,32 @@
         </div>
 
         <div class="footer-col">
-            <h4 data-vn="Liên kết nhanh" data-en="Quick Links">Liên kết nhanh</h4>
+            <h4>Liên kết nhanh</h4>
             <ul class="footer-links">
-                <li><a href="#about" data-vn="Về Viện" data-en="About">Về Viện</a></li>
-                <li><a href="#research" data-vn="Nghiên cứu" data-en="Research">Nghiên cứu</a></li>
-                <li><a href="#academy" data-vn="Học viện" data-en="Academy">Học viện</a></li>
-                <li><a href="#projects" data-vn="Dự án" data-en="Projects">Dự án</a></li>
-                <li><a href="#news" data-vn="Tin tức" data-en="News">Tin tức</a></li>
+                <li><a href="#about">Về Viện</a></li>
+                <li><a href="#organization">Cơ cấu tổ chức</a></li>
+                <li><a href="#leadership">Hội đồng Viện</a></li>
+                <li><a href="#ema">Học viện EMA</a></li>
+                <li><a href="#news">Tin tức</a></li>
             </ul>
         </div>
 
         <div class="footer-col">
-            <h4 data-vn="Chuyên môn" data-en="Expertise">Chuyên môn</h4>
+            <h4>Chuyên môn</h4>
             <ul class="footer-links">
-                <li><a href="#" data-vn="Kinh tế xanh" data-en="Green Economy">Kinh tế xanh</a></li>
-                <li><a href="#" data-vn="Quy hoạch đô thị" data-en="Urban Planning">Quy hoạch đô thị</a></li>
-                <li><a href="#" data-vn="Chuyển đổi số" data-en="Digital Transformation">Chuyển đổi số</a></li>
-                <li><a href="#" data-vn="Đổi mới sáng tạo" data-en="Innovation">Đổi mới sáng tạo</a></li>
-                <li><a href="#" data-vn="Tư vấn chính sách" data-en="Policy Consulting">Tư vấn chính sách</a></li>
+                <li><a href="#">Kinh tế xanh</a></li>
+                <li><a href="#">Quy hoạch đô thị</a></li>
+                <li><a href="#">Chuyển đổi số</a></li>
+                <li><a href="#">Đổi mới sáng tạo</a></li>
+                <li><a href="#">Tư vấn chính sách</a></li>
             </ul>
         </div>
 
         <div class="footer-col">
-            <h4 data-vn="Liên hệ" data-en="Contact">Liên hệ</h4>
+            <h4>Liên hệ</h4>
             <div class="footer-contact-item">
                 <i class="fa-solid fa-location-dot"></i>
-                <span data-vn="Ô số 7-ĐG1, Khu đấu giá QSĐ, phường Đại Mỗ, Hà Nội" data-en="Plot No. 7-DG1, Land Auction Area, Dai Mo Ward, Hanoi">Ô số 7-ĐG1, Khu đấu giá QSĐ, phường Đại Mỗ, Hà Nội</span>
+                <span>Ô số 7-ĐG1, Khu đấu giá QSĐ, phường Đại Mỗ, Hà Nội</span>
             </div>
             <div class="footer-contact-item">
                 <i class="fa-solid fa-phone"></i>
@@ -1857,87 +1019,48 @@
             </div>
             <div class="footer-contact-item">
                 <i class="fa-solid fa-certificate"></i>
-                <span data-vn="Giấy CN số C-33/2025/ĐK-KH&CN" data-en="Certificate No. C-33/2025/DK-KH&CN">Giấy CN số C-33/2025/ĐK-KH&CN</span>
+                <span>Giấy CN số C-33/2025/ĐK-KH&CN</span>
             </div>
         </div>
     </div>
 
     <div class="footer-bottom">
-        <span data-vn="© 2026 Viện Kinh tế Phát triển và Quy hoạch (IDEP). Bản quyền thuộc về Viện." data-en="© 2026 Institute of Development Economics and Planning (IDEP). All rights reserved.">
-            © 2026 Viện Kinh tế Phát triển và Quy hoạch (IDEP). Bản quyền thuộc về Viện.
-        </span>
+        © 2026 Viện Kinh tế Phát triển và Quy hoạch (IDEP). Bản quyền thuộc về Viện.
     </div>
 </footer>
 
 <script>
-    // ===== LANGUAGE SWITCHER =====
-    const langButtons = document.querySelectorAll('.lang-btn');
-    let currentLang = 'vn';
-
-    langButtons.forEach(btn => {
+    // Language switcher (đơn giản, chỉ đổi class active)
+    document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.addEventListener('click', () => {
-            currentLang = btn.dataset.lang;
-            langButtons.forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            updateLanguage();
         });
     });
 
-    function updateLanguage() {
-        const elements = document.querySelectorAll('[data-vn]');
-        elements.forEach(el => {
-            const text = el.dataset[currentLang];
-            if (text) {
-                // Nếu có HTML tags (như <br>, <span>), dùng innerHTML
-                if (text.includes('<')) {
-                    el.innerHTML = text;
-                } else {
-                    // Tìm phần text cần đổi - nếu có lang-text thì chỉ đổi text đó
-                    const langText = el.querySelector('.lang-text');
-                    if (langText) {
-                        langText.textContent = text;
-                    } else {
-                        el.textContent = text;
-                    }
-                }
-            }
-        });
-        // Đổi lang attribute của html
-        document.documentElement.lang = currentLang === 'vn' ? 'vi' : 'en';
-    }
-
-    // ===== SCROLL ANIMATION =====
+    // Scroll animation
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
+            if (entry.isIntersecting) entry.target.classList.add('visible');
         });
     }, { threshold: 0.1 });
-
-    document.querySelectorAll('.section, .field-card, .news-card').forEach(el => {
+    document.querySelectorAll('.section, .field-card, .news-card, .member-card, .org-unit').forEach(el => {
         el.classList.add('fade-in');
         observer.observe(el);
     });
 
-    // ===== ACTIVE NAV ON SCROLL =====
+    // Active nav on scroll
     const navLinks = document.querySelectorAll('.main-nav a');
     const sections = document.querySelectorAll('section[id]');
-
     window.addEventListener('scroll', () => {
         let current = '';
         sections.forEach(section => {
-            const top = section.offsetTop - 100;
-            if (scrollY >= top) {
-                current = section.getAttribute('id');
-            }
+            const top = section.offsetTop - 120;
+            if (scrollY >= top) current = section.getAttribute('id');
         });
-
         navLinks.forEach(link => {
             link.classList.remove('active');
-            if (link.getAttribute('href') === `#${current}`) {
-                link.classList.add('active');
-            }
+            if (link.getAttribute('href') === `#${current}`) link.classList.add('active');
         });
     });
 </script>
