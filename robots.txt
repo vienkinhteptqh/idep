@@ -1,0 +1,16 @@
+# Robots.txt cho Viện IDEP
+# Website: https://idep.com.vn
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://idep.com.vn/sitemap.xml
+
+# Cho phép Google Image Bot
+User-agent: Googlebot-Image
+Allow: /
+
+# Cho phép Bing
+User-agent: Bingbot
+Allow: /

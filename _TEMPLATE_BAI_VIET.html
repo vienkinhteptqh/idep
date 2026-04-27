@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<!--
+================================================================================
+TEMPLATE BÀI VIẾT TIN TỨC - VIỆN IDEP
+================================================================================
+
+CÁCH SỬ DỤNG (anh chỉ cần làm 5 bước):
+
+BƯỚC 1: Đổi tên file này thành tên bài mới
+  Ví dụ: tin-quangninh.html, tin-hoithao-2026.html
+  QUY TẮC: bắt đầu bằng "tin-", chỉ dùng chữ thường, không dấu, ngăn cách bằng dấu "-"
+
+BƯỚC 2: Tìm các đoạn có dấu [[ ]] và thay nội dung
+  Tổng cộng có 12 chỗ cần đổi - tìm bằng Ctrl+F trong text editor
+
+BƯỚC 3: Upload file ảnh thumbnail (16:9, đặt tên: thumb_<tenbai>.jpg)
+  và các ảnh trong bài (đặt tên rõ ràng: vidu_1.jpg, vidu_2.jpg)
+
+BƯỚC 4: Mở file index.html, tìm phần <!-- NEWS -->
+  Thêm 1 thẻ <article class="news-card">...</article> mới (copy từ tin có sẵn)
+  Đổi: link href="ten-file-moi.html", ảnh src="thumb_tenbai.jpg", tiêu đề, mô tả
+
+BƯỚC 5: Mở file sitemap.xml, thêm URL bài mới vào (giúp Google tìm thấy nhanh)
+
+================================================================================
+-->
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ===== SEO META - ĐỔI NỘI DUNG BÊN DƯỚI ===== -->
+<title>[[TIÊU ĐỀ BÀI VIẾT]] | Viện IDEP</title>
+<meta name="description" content="[[MÔ TẢ NGẮN 150-160 KÝ TỰ - tóm tắt nội dung bài viết, có chứa từ khóa quan trọng]]">
+<meta name="keywords" content="Viện IDEP, [[TỪ KHÓA 1]], [[TỪ KHÓA 2]], [[TỪ KHÓA 3]]">
+<meta name="author" content="Viện Kinh tế Phát triển và Quy hoạch (IDEP)">
+<link rel="canonical" href="https://idep.com.vn/[[TÊN-FILE.html]]">
+
+<!-- Open Graph (chia sẻ Facebook, Zalo) -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="[[TIÊU ĐỀ BÀI VIẾT]]">
+<meta property="og:description" content="[[MÔ TẢ NGẮN]]">
+<meta property="og:image" content="https://idep.com.vn/[[ẢNH-ĐẠI-DIỆN.jpg]]">
+<meta property="og:url" content="https://idep.com.vn/[[TÊN-FILE.html]]">
+<meta property="og:site_name" content="Viện Kinh tế Phát triển và Quy hoạch (IDEP)">
+<meta property="og:locale" content="vi_VN">
+<meta property="article:published_time" content="[[YYYY-MM-DD]]">
+
+<!-- Schema.org Article -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "NewsArticle",
+  "headline": "[[TIÊU ĐỀ BÀI VIẾT]]",
+  "image": ["https://idep.com.vn/[[ẢNH-ĐẠI-DIỆN.jpg]]"],
+  "datePublished": "[[YYYY-MM-DD]]",
+  "author": {"@type": "Person", "name": "[[TÁC GIẢ]]"},
+  "publisher": {
+    "@type": "Organization",
+    "name": "Viện Kinh tế Phát triển và Quy hoạch",
+    "logo": {"@type": "ImageObject", "url": "https://idep.com.vn/logo_idep.jpg"}
+  }
+}
+</script>
+
+<link rel="icon" type="image/jpeg" href="logo_idep.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+    :root { --navy: #0A2540; --navy-dark: #061829; --navy-light: #1a3a5c; --gold: #C9A961; --gold-light: #D4B876; --gold-dark: #a88a47; --cream: #FAF7F2; --white: #FFFFFF; --gray-100: #E9ECEF; --gray-600: #6C757D; --gray-800: #343A40; --text-dark: #1a1a1a; --shadow-sm: 0 2px 8px rgba(10,37,64,0.08); --shadow-md: 0 8px 24px rgba(10,37,64,0.12); --font-display: 'Playfair Display', Georgia, serif; --font-body: 'Be Vietnam Pro', -apple-system, sans-serif; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font-body); color: var(--text-dark); line-height: 1.8; }
+    .top-bar { background: var(--navy-dark); color: var(--white); padding: 8px 0; font-size: 13px; }
+    .top-bar-content { max-width: 1280px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; }
+    .top-bar-info { display: flex; gap: 24px; }
+    .top-bar-info span { display: flex; align-items: center; gap: 8px; }
+    .top-bar-info i { color: var(--gold); }
+    .header { background: var(--white); box-shadow: var(--shadow-sm); border-bottom: 3px solid var(--gold); }
+    .nav-container { max-width: 1280px; margin: 0 auto; padding: 14px 24px; display: flex; justify-content: space-between; align-items: center; }
+    .logo-area { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+    .logo-area img { height: 56px; width: auto; }
+    .logo-text .name-vn { font-family: var(--font-display); font-weight: 700; font-size: 16px; color: var(--navy); line-height: 1.1; }
+    .logo-text .name-en { font-size: 11px; color: var(--gray-600); font-style: italic; margin-top: 2px; }
+    .back-btn { background: var(--navy); color: var(--white); padding: 10px 20px; border-radius: 4px; text-decoration: none; font-weight: 500; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; transition: background 0.3s; }
+    .back-btn:hover { background: var(--gold); color: var(--navy-dark); }
+    .breadcrumb-section { background: var(--cream); padding: 16px 0; border-bottom: 1px solid var(--gray-100); }
+    .breadcrumb { max-width: 1280px; margin: 0 auto; padding: 0 24px; font-size: 14px; color: var(--gray-600); }
+    .breadcrumb a { color: var(--navy); text-decoration: none; }
+    .breadcrumb i { font-size: 11px; margin: 0 8px; opacity: 0.5; }
+    .article-hero { background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%); color: var(--white); padding: 60px 0; }
+    .article-hero-content { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+    .article-category { display: inline-block; background: var(--gold); color: var(--navy-dark); padding: 6px 16px; border-radius: 4px; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 20px; }
+    .article-hero h1 { font-family: var(--font-display); font-size: 40px; line-height: 1.2; font-weight: 700; margin-bottom: 24px; }
+    .article-meta { display: flex; gap: 24px; font-size: 14px; opacity: 0.9; flex-wrap: wrap; }
+    .article-meta span { display: flex; align-items: center; gap: 8px; }
+    .article-meta i { color: var(--gold); }
+    .article-body { padding: 60px 0; }
+    .article-container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+    .article-lead { font-size: 18px; line-height: 1.8; color: var(--navy); font-weight: 500; padding: 24px 28px; background: var(--cream); border-left: 4px solid var(--gold); border-radius: 4px; margin-bottom: 36px; }
+    .article-content p { font-size: 16px; line-height: 1.85; margin-bottom: 24px; color: var(--gray-800); text-align: justify; }
+    .article-content strong { color: var(--navy); font-weight: 600; }
+    .article-figure { margin: 36px 0; }
+    .article-figure img { width: 100%; height: auto; border-radius: 8px; box-shadow: var(--shadow-md); display: block; }
+    .article-caption { text-align: center; font-size: 14px; color: var(--gray-600); font-style: italic; margin-top: 12px; line-height: 1.5; }
+    .article-footer { margin-top: 48px; padding-top: 32px; border-top: 2px solid var(--gray-100); }
+    .article-tags { margin-bottom: 24px; }
+    .tag-label { font-weight: 600; color: var(--navy); margin-right: 12px; font-size: 14px; }
+    .tag { display: inline-block; background: var(--cream); color: var(--navy); padding: 6px 14px; border-radius: 16px; font-size: 13px; margin-right: 8px; margin-bottom: 8px; border: 1px solid var(--gold); }
+    .article-author { display: flex; align-items: center; gap: 16px; padding: 20px; background: var(--cream); border-radius: 8px; }
+    .author-icon { width: 56px; height: 56px; border-radius: 50%; background: var(--navy); color: var(--gold); display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
+    .author-info strong { display: block; color: var(--navy); font-size: 15px; }
+    .author-info span { color: var(--gray-600); font-size: 13.5px; }
+    .footer { background: var(--navy-dark); color: var(--white); padding: 40px 0; text-align: center; font-size: 14px; }
+    .footer p { opacity: 0.85; margin-bottom: 8px; }
+    .footer a { color: var(--gold); text-decoration: none; }
+    @media (max-width: 768px) { .top-bar-info { display: none; } .article-hero h1 { font-size: 28px; } }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+    <div class="top-bar-content">
+        <div class="top-bar-info">
+            <span><i class="fa-solid fa-location-dot"></i>Ô số 7-ĐG1, Đại Mỗ, Hà Nội</span>
+            <span><i class="fa-solid fa-phone"></i>081.623.1059</span>
+            <span><i class="fa-solid fa-envelope"></i>vienkinhteptqh@gmail.com</span>
+        </div>
+        <div></div>
+    </div>
+</div>
+
+<!-- HEADER -->
+<header class="header">
+    <div class="nav-container">
+        <a href="index.html" class="logo-area">
+            <img src="logo_idep.jpg" alt="IDEP Logo" />
+            <div class="logo-text">
+                <div class="name-vn">VIỆN KINH TẾ PHÁT TRIỂN VÀ QUY HOẠCH</div>
+                <div class="name-en">Institute of Development Economics and Planning</div>
+            </div>
+        </a>
+        <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Về trang chủ</a>
+    </div>
+</header>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb-section">
+    <div class="breadcrumb">
+        <a href="index.html">Trang chủ</a>
+        <i class="fa-solid fa-chevron-right"></i>
+        <a href="index.html#news">Tin tức</a>
+        <i class="fa-solid fa-chevron-right"></i>
+        <span>[[TIÊU ĐỀ BÀI VIẾT]]</span>
+    </div>
+</div>
+
+<!-- ARTICLE HERO -->
+<section class="article-hero">
+    <div class="article-hero-content">
+        <span class="article-category">[[DANH MỤC: VD HỘI THẢO / TƯ VẤN / ĐÀO TẠO]]</span>
+        <h1>[[TIÊU ĐỀ BÀI VIẾT]]</h1>
+        <div class="article-meta">
+            <span><i class="fa-regular fa-calendar"></i> [[NGÀY/THÁNG/NĂM]]</span>
+            <span><i class="fa-solid fa-location-dot"></i> [[ĐỊA ĐIỂM]]</span>
+            <span><i class="fa-solid fa-user-pen"></i> [[TÁC GIẢ]]</span>
+        </div>
+    </div>
+</section>
+
+<!-- ARTICLE BODY -->
+<article class="article-body">
+    <div class="article-container">
+
+        <!-- ĐOẠN MỞ ĐẦU NỔI BẬT -->
+        <div class="article-lead">
+            [[ĐOẠN GIỚI THIỆU NỔI BẬT — 2-3 câu tóm tắt nội dung quan trọng nhất. Có thể dùng <strong>...</strong> để nhấn mạnh.]]
+        </div>
+
+        <div class="article-content">
+
+            <!-- ĐOẠN VĂN 1 -->
+            <p>[[NỘI DUNG ĐOẠN VĂN 1]]</p>
+
+            <!-- ẢNH 1 (nếu có) -->
+            <figure class="article-figure">
+                <img src="[[ẢNH-1.jpg]]" alt="[[MÔ TẢ ẢNH 1]]">
+                <figcaption class="article-caption">[[CHÚ THÍCH ẢNH 1]]</figcaption>
+            </figure>
+
+            <!-- ĐOẠN VĂN 2 -->
+            <p>[[NỘI DUNG ĐOẠN VĂN 2]]</p>
+
+            <!-- ẢNH 2 (nếu có, copy thêm <figure> như trên) -->
+
+            <!-- ĐOẠN VĂN 3, 4, 5... (copy thêm <p>...</p> nếu cần) -->
+            <p>[[ĐOẠN VĂN TIẾP THEO]]</p>
+
+        </div>
+
+        <!-- TAGS & TÁC GIẢ -->
+        <div class="article-footer">
+            <div class="article-tags">
+                <span class="tag-label">Từ khóa:</span>
+                <span class="tag">[[TỪ KHÓA 1]]</span>
+                <span class="tag">[[TỪ KHÓA 2]]</span>
+                <span class="tag">[[TỪ KHÓA 3]]</span>
+            </div>
+
+            <div class="article-author">
+                <div class="author-icon"><i class="fa-solid fa-user-edit"></i></div>
+                <div class="author-info">
+                    <strong>Tin và ảnh: [[TÁC GIẢ]]</strong>
+                    <span>[[ĐƠN VỊ - VD: Văn phòng Viện IDEP]]</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+
+<footer class="footer">
+    <div>
+        <p>© 2026 Viện Kinh tế Phát triển và Quy hoạch (IDEP). Bản quyền thuộc về Viện.</p>
+        <p><a href="index.html">Quay về trang chủ</a> | <a href="index.html#news">Xem thêm tin tức</a></p>
+    </div>
+</footer>
+
+</body>
+</html>

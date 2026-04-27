@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+    <url>
+        <loc>https://idep.com.vn/</loc>
+        <lastmod>2026-04-27</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+        <image:image>
+            <image:loc>https://idep.com.vn/logo_idep.jpg</image:loc>
+            <image:title>Viện Kinh tế Phát triển và Quy hoạch (IDEP)</image:title>
+        </image:image>
+    </url>
+    <url>
+        <loc>https://idep.com.vn/tin-quangninh.html</loc>
+        <lastmod>2025-12-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <image:image>
+            <image:loc>https://idep.com.vn/qn_kimchi.jpg</image:loc>
+            <image:title>Hội thảo Phát triển thị trường KH&amp;CN tại Quảng Ninh</image:title>
+        </image:image>
+    </url>
+</urlset>
